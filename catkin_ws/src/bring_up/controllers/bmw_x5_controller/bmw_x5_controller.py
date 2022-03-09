@@ -11,7 +11,7 @@ from std_msgs.msg import Float64
 from sensor_msgs.msg import Image, PointCloud2, PointField, NavSatFix, NavSatStatus, Imu
 
 # CONSTANTS
-TIME_STEP = 50
+TIME_STEP = 33
 TRACK_FRONT = 1.7
 WHEEL_BASE = 4.0
 
@@ -55,7 +55,7 @@ def main():
   # INIT ROS
   print('STARTING BMW X5 CONTROLLER NODE ...')
   rospy.init_node('bmw_x5_controller')
-  rate = rospy.Rate(20)
+  rate = rospy.Rate(30)
 
   print('SIMULATION FOR THE  AUTOMODELCAR LEAGUE OF THE MEXICAN ROBOTICS TOURNAMENT')
   print('TO MOVE THE VEHICLE, USE THE CORRESPONDING TOPICS')
