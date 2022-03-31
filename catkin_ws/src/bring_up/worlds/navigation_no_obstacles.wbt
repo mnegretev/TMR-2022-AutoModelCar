@@ -426,31 +426,3 @@ BmwX5 {
     }
   ]
 }
-DEF OBS-5 TeslaModel3Simple {
-  translation 19.43 0.4 5.15589e-05
-  rotation 0 1 0 3.14159
-  name "vehicle(4)"
-}
-DEF OBS-4 RangeRoverSportSVRSimple {
-  translation -20.5549 0.4 47.1554
-  rotation 0 1 0 0.785398
-  name "vehicle(3)"
-}
-DEF OBS-1 CitroenCZeroSimple {
-  translation -36.89 0.4 3.18
-  name "vehicle(1)"
-}
-DEF OBS-2 LincolnMKZSimple {
-  translation 9.3403 0.4 75.57
-  rotation 0 1 0 1.5708
-  name "vehicle(2)"
-}
-DEF OBS-3 MercedesBenzSprinterSimple {
-  translation 10.31 0.4 10.6
-  rotation 0 1 0 -1.5707953071795862
-}
-Robot {
-  name "supervisor"
-  controller "supervisor_controller"
-  supervisor TRUE
-}

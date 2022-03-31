@@ -38,31 +38,8 @@ tf_2.setSFVec3f(sp_2)
 tf_3.setSFVec3f(sp_3)
 tf_5.setSFVec3f(sp_5)
 
-vel_1 = [0.0, 0.0, numpy.random.uniform(3.0, 6.0), 0.0, 0.0, 0.0] 
-vel_2 = [0.0, numpy.random.uniform(3.0, 6.0), 0.0, 0.0, 0.0, 0.0] 
-vel_3 = [0.0, 0.0, numpy.random.uniform(3.0, 6.0), 0.0, 0.0, 0.0]  
-vel_4 = [0.0, 0.0, numpy.random.uniform(3.0, 6.0), 0.0, 0.5, 0.0]
-vel_5 = [0.0, 0.0, numpy.random.uniform(3.0, 6.0), 0.0, 0.0, 0.0] 
-
-
 def main():
-    print('Starting Controller Supervisor...')
-    i = 0
-    while robot.step(TIME_STEP) != -1:
-        if i == 0:                              # SET INITIAL VELOCITY
-            car_1.setVelocity(vel_1)
-            car_2.setVelocity(vel_2)
-            car_3.setVelocity(vel_3)
-            car_4.setVelocity(vel_4)
-            car_5.setVelocity(vel_5)
-        elif i == 350:                          # RETURN TO INITIAL
-            tf_1.setSFVec3f(sp_1)
-            tf_2.setSFVec3f(sp_2)
-            tf_3.setSFVec3f(sp_3)
-            tf_4.setSFVec3f(sp_4)
-            tf_5.setSFVec3f(sp_5)
-            i = 0
-        i+=1
+    print('Starting Controller Supervisor for Navigation with Static Obstacles...')
         
 
 if __name__ == "__main__":
