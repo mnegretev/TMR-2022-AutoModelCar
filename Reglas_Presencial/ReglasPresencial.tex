@@ -1,4 +1,5 @@
 \documentclass[letterpaper,12pt]{article}
+\usepackage[top=3.0cm, bottom=3.0cm, left=3.0cm, right=3.0cm]{geometry}
 \usepackage[spanish]{babel}
 \spanishdecimal{.}
 \selectlanguage{spanish}
@@ -22,6 +23,7 @@
 \author{Libro de Reglas, modalidad Presencial}
 \date{Ciudad Victoria, 2022}
 \begin{document}
+\renewcommand{\tablename}{Tabla}
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,6 +50,15 @@ Los antecedentes directos del presente libro de reglas son el evento realizado e
 %%%%%%%% SOBRE LOS VEHÍCULOS %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Sobre los vehículos}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.95\textwidth]{Figures/coverpic.jpg}
+  \caption{El vehículo AutoNOMOS}
+  \label{fig:AutoNOMOS}
+\end{figure}
+
+
 En esta edición de la competencia se permitirá el uso tanto de vehículos AutoNOMOS, en cualquiera de sus versiones, como vehículos de construcción propia (plataformas abiertas) o cualquier otra plataforma, siempre y cuando se cumpla con las siguientes restricciones:
 \begin{itemize}
 \item Se prohíbe el uso de dispositivos externos, salvo para monitoreo.
@@ -56,20 +67,16 @@ En esta edición de la competencia se permitirá el uso tanto de vehículos Auto
 \end{itemize}
 
 \subsection{Los vehículos AutoNOMOS}
+
 Las especificaciones de vehículos AutoNOMOS, en sus versiones 1, 2 y 3 desarrollados por el equipo del Prof. Raúl Rojas en la Freie Universität Berlin, se describen en la siguiente liga:
 \url{https://github.com/AutoModelCar/AutoModelCarWiki/wiki}
-Las siguiente imágen muestra el aspecto externo de estos vehículos.
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{Figures/coverpic.jpg}
-  \caption{El vehículo AutoNOMOS}
-\end{figure}
-En ediciones anteriores no se permitían modificaciones de ningún tipo al hardware de estos vehículos, sin embargo, en esta edición del TMR se permitirá cualquier modificación siempre y cuando el vehículo resultante \textbf{no exceda los 65x25x20 cm (largo, ancho y alto)}.
+La figura \ref{fig:AutoNOMOS} muestra el aspecto externo de estos vehículos. En ediciones anteriores no se permitían modificaciones de ningún tipo al hardware de estos vehículos, sin embargo, en esta edición del TMR se permitirá cualquier modificación siempre y cuando el vehículo resultante \textbf{no exceda los 65x25x20 cm (largo, ancho y alto)} y las proporciones se mantengan en un margen razonable, considerando que los vehículos deben representar autos reales a escala. 
 
 \subsection{Plataformas abiertas}
 Los vehículos de construcción propia deberán cumplir con las siguiente especificaciones:
 \begin{itemize}
 \item \textbf{El tamaño máximo deberá ser de 65 cm largo X 25 cm ancho X 20 cm alto.}
+\item Deben tener las proporciones adecuadas para representar una versión a escala de un vehículo real. 
 \item Se puede utilizar cualquier tipo de sensor, pero todos los dispositivos deben estar
 montados en el robot.
 \item Las demás restricciones descritas al inicio de esta sección.
@@ -82,21 +89,22 @@ Las dimensiones máximas se determinaron considerando que pueda participar un ve
 \section{Sobre la arena}
 \subsection{Pista de pruebas}
 El desarrollo de las pruebas de conducción autónoma se realiza sobre una superficie de rodamiento consistente en una carpeta de material plástico artificial de 12 x 8 m, de color negro. Debe anticiparse cierto nivel de brillo o reflexión de la superficie de competencia. Sobre la
-carpeta plástica se definen las líneas blancas correspondientes a los carriles que se muestra mediante impresión o cinta plastificada (de aislar). En la figura se muestra un ejemplo de circuito, con las especificaciones de anchos de carril, radios externos e internos de las curvas. El circuito que se use en la competencia podrá tener variaciones con respecto a esta descripción.
+carpeta plástica se definen las líneas blancas correspondientes a los carriles que se muestra mediante impresión o cinta plastificada (de aislar). En la figura \ref{fig:Arena} se muestra un ejemplo de circuito, con las especificaciones de anchos de carril, radios externos e internos de las curvas. El circuito que se use en la competencia podrá tener variaciones con respecto a esta descripción.
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{Figures/pista.png}
   \caption{Ejemplo de la pista de pruebas}
+  \label{fig:Arena}
 \end{figure}
 
 En el ejemplo anterior, el circuito posee dos intersecciones en la parte central, donde los vehículos deberán ser capaces de detectar y evitar colisiones con otros vehículos que circulen por la pista (para las pruebas de navegación con obstáculos). 
 
 \subsection{Zona de estacionamiento}
-Asimismo, habrá una zona separada de la pista para las pruebas de estacionamiento lateral, como se ilustra en la figura. La banqueta será delimitada por “paredes” con altura suficiente para que pueda ser detectada por los sensores del robot. A diferencia de los años anteriores, el espacio para estacionarse estará delimitado por otros vehículos y no por paredes. Para este fin, se utilizarán los vehículos de otros equipos.
+Asimismo, habrá una zona separada de la pista para las pruebas de estacionamiento lateral, como se ilustra en la figura \ref{fig:Parking}. La banqueta será delimitada por “paredes” con altura suficiente para que pueda ser detectada por los sensores del robot. A diferencia de los años anteriores, el espacio para estacionarse estará delimitado por otros vehículos y no solo por paredes. Para este fin, se utilizarán los vehículos de otros equipos.
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{Figures/Parking.pdf}
+  \includegraphics[width=0.95\textwidth]{Figures/Parking.pdf}
   \caption{Zona de estacionamiento}
   \label{fig:Parking}
 \end{figure}
@@ -113,34 +121,37 @@ En cuanto a los obstáculos, se utilizarán los vehículos a escala de otros equ
 
 Todas las pruebas se llevarán a cabo dentro de la pista bajo las siguientes reglas:
 
-\textbf{1.} Bajo ninguna circunstancia se permitirá el control del automóvil por algún miembro de equipo. \textbf{La navegación debe ser autónoma} y la única ocasión en la que el equipo podrá intervenir es cuando se prepare el arranque inicial del vehículo o cuando se tenga que detener el mismo, ya sea debido a alguna colisión o por que el juez solicite un paro de emergencia.
+\begin{enumerate}
+\item Bajo ninguna circunstancia se permitirá el control del automóvil por algún miembro de equipo. \textbf{La navegación debe ser autónoma} y la única ocasión en la que el equipo podrá intervenir es cuando se prepare el arranque inicial del vehículo o cuando se tenga que detener el mismo, ya sea debido a alguna colisión o por que el juez solicite un paro de emergencia.
 
-\textbf{2.} El procesamiento deberá llevarse a cabo por completo a bordo del automóvil, sin embargo, para efectos de visualización y paro de emergencia será posible que el mismo envíe información sensorial o de estado a un equipo externo para su visualización, pero es importante
+\item El procesamiento deberá llevarse a cabo por completo a bordo del automóvil, sin embargo, para efectos de visualización y paro de emergencia será posible que el mismo envíe información sensorial o de estado a un equipo externo para su visualización, pero es importante
 que el equipo muestre al juez que se cuenta con un mecanismo de paro con el cual detener al vehículo de manera inmediata en caso de requerirse. De no contar con ello, el equipo no podrá participar en prueba alguna. Por ningún motivo los integrantes del equipo deberán manipular la
 aplicación de visualización durante la prueba, salvo en el caso de requerirse una acción de paro de emergencia.
 
-\textbf{3.} Una vez que el automóvil arranque, ningún miembro del equipo participante podrá controlar al vehículo mediante joystick, dispositivo móvil o computadora. Un miembro del equipo participante deberá ser asignado como el ``piloto'' y por lo tanto sólo el podrá accionar los controles correspondientes para el arranque y el paro. El resto de los miembros deberá tener las manos libres a la vista del juez. De igual forma, el equipo de jueces podrá solicitar suscribirse a algún mecanismo de monitoreo de tópicos del automóvil del equipo, o incluso grabar
+\item Una vez que el automóvil arranque, ningún miembro del equipo participante podrá controlar al vehículo mediante joystick, dispositivo móvil o computadora. Un miembro del equipo participante deberá ser asignado como el ``piloto'' y por lo tanto sólo el podrá accionar los controles correspondientes para el arranque y el paro. El resto de los miembros deberá tener las manos libres a la vista del juez. De igual forma, el equipo de jueces podrá solicitar suscribirse a algún mecanismo de monitoreo de tópicos del automóvil del equipo, o incluso grabar
 rosbags, o algún otro tipo de registro de datos . Ésto con la finalidad de verificar que no exista un control remoto del vehículo, pero también ayudaría a los equipos a recolectar datos en competencia que pudiesen utilizarse después para afinar los métodos implementados.
 
-\textbf{4.} En la pista sólo se permitirá la presencia de un juez durante cualquiera de las pruebas. El juez tiene la autoridad para dar por terminada la prueba, en caso de que estime que el vehículo no cumpla con las reglas aquí estipuladas o que considere algún tipo de riesgo.
+\item En la pista sólo se permitirá la presencia de un juez durante cualquiera de las pruebas. El juez tiene la autoridad para dar por terminada la prueba, en caso de que estime que el vehículo no cumpla con las reglas aquí estipuladas o que considere algún tipo de riesgo.
 
-\textbf{5.} Las pruebas se ejecutarán una a la vez y sólo un equipo podrá ocupar la pista, a menos que se requiera la participación simultánea de otro equipo. Los demás equipos deberán esperar en la cola de participación y fuera de la arena en todo momento. Aquellas pruebas que impliquen la participación simultánea de más de un equipo se realizarán con la misma mecánica.
+\item Las pruebas se ejecutarán una a la vez y sólo un equipo podrá ocupar la pista, a menos que se requiera la participación simultánea de otro equipo. Los demás equipos deberán esperar en la cola de participación y fuera de la arena en todo momento. Aquellas pruebas que impliquen la participación simultánea de más de un equipo se realizarán con la misma mecánica.
 
-\textbf{6.} Se realizarán tres intentos por prueba. Para fines de monitoreo, sólo el equipo participante podrá tener encendida una red WiFi.
+\item Se realizarán tres intentos por prueba. Para fines de monitoreo, sólo el equipo participante podrá tener encendida una red WiFi.
 
-\textbf{7.} Los miembros del equipo podrán ingresar a la arena únicamente antes del inicio de la prueba, para colocar al automóvil o realizar ajustes (previamente autorizados por el juez), y posterior a que la prueba se ha dado por terminada. Sólo podrán ingresar aquellos miembros del equipo que cuenten con inscripción y lugar en mesa de trabajo, es decir, los mentores deberań permanecer fuera de la arena.
+\item Los miembros del equipo podrán ingresar a la arena únicamente antes del inicio de la prueba, para colocar al automóvil o realizar ajustes (previamente autorizados por el juez), y posterior a que la prueba se ha dado por terminada. Sólo podrán ingresar aquellos miembros del equipo que cuenten con inscripción y lugar en mesa de trabajo, es decir, los mentores deberań permanecer fuera de la arena.
 
-\textbf{8.} La pose inicial del automóvil (posición y dirección) será determinada por el comité técnico y podrá ser diferente para cada auto. Esta pose inicial se notificará al equipo en el momento de iniciar su prueba.
+\item La pose inicial del automóvil (posición y dirección) será determinada por el comité técnico y podrá ser diferente para cada auto. Esta pose inicial se notificará al equipo en el momento de iniciar su prueba.
 
-\textbf{9.} Si el automóvil participante choca contra algún objeto, persona, automóvil o ambientación dentro o fuera de la pista, la prueba se dará por terminada inmediatamente.
+\item Si el automóvil participante choca contra algún objeto, persona, automóvil o ambientación dentro o fuera de la pista, la prueba se dará por terminada inmediatamente.
 
-\textbf{10.} Si el automóvil pierde el control de manera abrupta, se impacta u ocasiona cualquier otro tipo de accidente, el equipo podrá quedar descalificado a criterio de los jueces, por ello es de vital importancia que el equipo participante siempre se encuentre alerta del estado del automóvil y que verifique que el mismo se pueda detener en cualquier momento.
+\item Si el automóvil pierde el control de manera abrupta, se impacta u ocasiona cualquier otro tipo de accidente, el equipo podrá quedar descalificado a criterio de los jueces, por ello es de vital importancia que el equipo participante siempre se encuentre alerta del estado del automóvil y que verifique que el mismo se pueda detener en cualquier momento.
 
-\textbf{11.} Los equipos deberán llevar cargadas sus baterías al momento de ejecutar una prueba,esto es, no debe haber equipo de recarga de baterías al momento de efectuar la prueba y aquellas baterías cargadas que no se utilicen durante la misma deberán ser almacenadas en bolsas de seguridad de acuerdo al tipo de batería.
+\item Los equipos deberán llevar cargadas sus baterías al momento de ejecutar una prueba,esto es, no debe haber equipo de recarga de baterías al momento de efectuar la prueba y aquellas baterías cargadas que no se utilicen durante la misma deberán ser almacenadas en bolsas de seguridad de acuerdo al tipo de batería.
 
-\textbf{12.} Queda estrictamente prohibido realizar pruebas fuera de la pista a excepción de aquellas realizadas por los equipos en sus mesas de trabajo y bajo su propia responsabilidad. Antes de la competencia se tendrán tiempos asignados para que los equipos realicen sesiones de
+\item Queda estrictamente prohibido realizar pruebas fuera de la pista a excepción de aquellas realizadas por los equipos en sus mesas de trabajo y bajo su propia responsabilidad. Antes de la competencia se tendrán tiempos asignados para que los equipos realicen sesiones de
 prueba, por lo que durante la competencia a excepción del equipo participante en turno, los equipos en la lista de espera para entrar a la arena no podrán encender cualquier tipo de aparato que pueda causar interferencia en las comunicaciónes del resto de autos que se encuentran
 compitiendo dentro de la arena.
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%% PRUEBAS %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -158,30 +169,112 @@ Cada equipo tendrá 10 minutos para ejecutar cada prueba (o repetir las que dese
 efectuar la prueba, la misma se dará por concluida sin puntos y pierde su turno. En este caso el tiempo restante se dará como tiempo de preparación para que el resto de los equipos puedan hacer una prueba rápida, mientras le toca el turno al siguiente equipo en la lista. Los equipos en la cola de espera deben estar listos para participar inmediatamente en cuanto les toque su turno. El orden de participación se realizará en forma aleatoria al inicio del concurso y éste debe ser respetado. Cada equipo debe participar en el turno que le corresponde.
 
 \subsection{Presentación del póster}
-Consiste en presentar un póster con la descripción del equipo, características del hardware, descripción de los métodos utilizados y resultados obtenidos. El cartel deberá tener un tamaño A1 y deberá ser presentado en el lugar y hora que el comité organizador designe al principio de la competencia.\textbf{La presentación del póster no otorga puntos pero es obligatoria para la participación en las demás pruebas}.
+Consiste en presentar un póster con la descripción del equipo, características del hardware, descripción de los métodos utilizados, resultados obtenidos y demás información que el equipo considere relevante. El cartel deberá tener un tamaño A1 y deberá ser presentado en el lugar y hora que el comité organizador designe al principio de la competencia.\textbf{La presentación del póster no otorga puntos pero es obligatoria para la participación en las demás pruebas}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%PUNTUACIÓN Y DESEMPATE %%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Sistema de puntuación y criterios de desempate}
+\section{Sistema de puntuación}
 Los principios para establecer la puntuación que un equipo alcanza serán simples:
 \begin{itemize}
 \item Quien concluye el circuito exitósamente en las pruebas 1, 2 y 3, obtiene mayor puntuación que quien no lo termina.
 \item Los equipos que concluyen exitosamente una prueba se ordenarán de acuerdo al tiempo que requirieron para cubrir el circuito, en orden ascendente.
-\item Se aplicarán penalizaciones en forma de un tiempo predefinido (ver sección \ref{sec:FinalScore} sobre las sanciones) que se deberá sumar al tiempo total requerido por el equipo para concluir la prueba. más las sanciones de tiempo recibidas.
+\item Se aplicarán penalizaciones en forma de un tiempo predefinido (ver sección \ref{sec:penalties} sobre las sanciones) que se deberá sumar al tiempo total requerido por el equipo para concluir la prueba. 
 \item El menor tiempo ganará la prueba.
 \item Los equipos que no concluyen la prueba se ordenarán de acuerdo a la distancia del trayecto recorrido (durante un tiempo máximo de 5 minutos), restando 3 metros por cada minuto de sanciones acumulado. Por ejemplo, si alguien recorrió 9 metros en tres minutos y tiene un minuto de sanciones acumuladas se le asignará un recorrido total de 6 metros.
-\item En la prueba sobre estacionamiento autónomo, se ordenará a los equipos de acuerdo al tiempo final requerido para concluir exitosamente la prueba, luego de aplicar sanciones a aquellos autos que colisionen contra algún obstáculo (ver sección \ref{sec:FinalScore}). Quien no logra estacionarse recibirá puntuación nula. Se considerará como exitosa la prueba si el vehículo queda estacionado dentro del espacio identificado en la Figura \ref{fig:Parking} como “Area permitida”.
+\item En la prueba sobre estacionamiento autónomo, se ordenará a los equipos de acuerdo al tiempo final requerido para concluir exitosamente la prueba, luego de aplicar sanciones a aquellos autos que colisionen contra algún obstáculo (ver sección \ref{sec:penalties}). Quien no logra estacionarse recibirá puntuación nula. Se considerará como exitosa la prueba si el vehículo queda estacionado dentro del espacio identificado en la Figura \ref{fig:Parking} como “Area permitida”.
 \end{itemize}
+\[\]
+\[\]
+\[\]
+\subsection{Puntuación por prueba}
+\label{sec:scoring}
+Se otorgarán puntos por cada una de las pruebas de acuerdo a la posición ocupada en la lista de menores tiempos de acuerdo con la tabla \ref{tab:Scoring}. Si un equipo no participa en una prueba, obtendrá cero puntos en la misma.
+
+\begin{table}[h!] 
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    Lugar &    1&   2&   3&   4&   5&   6&   7&   8&   9&10\\
+    \hline
+    Puntos & 50 & 45 & 40 & 35 & 30 & 25 & 20 & 15 & 10 & 5\\
+    \hline
+  \end{tabular}
+  \caption{Puntuación por prueba}
+  \label{tab:Scoring}
+\end{table}
+
+
+\subsection{Sanciones}
+\label{sec:penalties}
+A continuación se detalla la lista de causas y penalizaciones en tiempo:
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|p{0.65\textwidth}|p{0.3\textwidth}|}
+    \hline
+    $\qquad\qquad$Causa & Penalización\\
+    \hline
+    Salir del carril parcialmente, regresando en menos de 5 segundos. & 5 segundos\\
+    \hline
+    Salir completamente del carril, regresando en menos de 5 segundos & 10 segundos\\
+    \hline
+    Salir (total o parcialmente) y tardar más de 5 segundos en regresar al carril. & 20 segundos\\
+    \hline
+    Tocar un obstáculo estático o móvil. & 30 segundos\\
+    \hline
+    Salir del carril (total o parcialmente) y no regresar en 30 segundos.  & 30 segundos y conclusión de la prueba.\\
+    \hline
+    Tocar un obstáculo durante la prueba de estacionamiento. & 10 segundos\\
+    \hline
+  \end{tabular}
+  \caption{Penalizaciones}
+  \label{tab:Penalties}
+\end{table}
+
+\subsection{Puntuación Final}
+\label{sec:final_score}
+Los puntos obtenidos en cada prueba se multiplicarán por un factor de ponderación asociado a cada prueba, como se indica en la tabla \ref{tab:weights}. La puntuación total será la suma de cada prueba por su factor de ponderación.
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|l|c|}
+    \hline
+    Prueba & Factor de ponderación\\
+    \hline
+    Navegación sin obstáculos & 1.0 \\
+    \hline
+    Navegación con obstáculos estáticos & 1.5 \\
+    \hline
+    Navegación con obstáculos en movimiento & 2.0 \\
+    \hline
+    Estacionamiento\\
+    \hline
+  \end{tabular}
+  \caption{Factores de ponderación por prueba}
+  \label{tab:weights}
+\end{table}
+
+
+\subsection{Criterios de desempate}
+En el caso del primer, segundo y tercer lugares generales de la categoría, se tomará como primer criterio de desempate designar como ganador a aquel que tenga la mayor suma de factores de peso de las pruebas donde participó obteniendo puntuaciones mayores a cero, es decir, en función del grado de dificultad de las pruebas en las que participó.
+
+Si el empate aún persiste, el segundo criterio de desempate será designar como ganador al equipo que recibió el menor número de penalizaciones (sumando las penalizaciones totales). Si el empate aún persiste, el tercer criterio de desempate será el número de pruebas individuales en las que se participó y se obtuvo puntuación positiva.
+
+Si el empate persiste después de aplicar los criterios anteriores, se acreditará el mismo lugar a los equipos que se mantengan en la misma posición y se declararán vacantes los lugares que ocuparían en caso de que no hubiera empate.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%% CONTACTO %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Contacto}
+Cualquier duda o aclaración favor de dirigirla vía email a:
+
+Dr. Marco Negrete \texttt{marco.negrete@ingenieria.unam.edu}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%% CRÉDITOS %%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Créditos}
+El formato, textos y estructura del presente documento se basó en el reglamento para la categoría de drones del Torneo Mexicano de Robótica 2017 elaborado por el Dr. José Martínez Carranza y el Dr. Enrique Sucar Succar, y en los reglamentos de ediciones anteriores de esta misma competencia. 
 \end{document}
 
