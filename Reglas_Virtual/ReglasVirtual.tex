@@ -90,29 +90,70 @@ La modalidad virtual pretende ser lo más parecido posible a la modalidad presen
 \begin{itemize}
 \item Tópicos publicados:
   \begin{itemize}
-    \item \texttt{/camera}
+  \item \texttt{/camera/rgb/raw} (sensor\_msgs/Image): Imagen RGB de la cámara
+  \item \texttt{/point\_cloud} (sensor\_msgs/PointCloud2): Nube de puntos generada por el Lidar
+  \item \texttt{/gps} (sensor\_msgs/NavSatFix): Lectura del GPS
+  \item \texttt{/gyro} (sensor\_msgs/Imu): Lectura del giroscopio
   \end{itemize}
 \item Tópicos suscritos:
   \begin{itemize}
-    \item \texttt{/camera}
+  \item \texttt{/speed} (std\_msgs/Float64): Velocidad lineal deseada en [m/s]
+  \item \texttt{/steering} (std\_msgs/Float64): Ángulo de las llantas delanteras en [rad]
   \end{itemize}
 \end{itemize}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%% SOBRE LA ARENA  %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Sobre la arena}
 \subsection{Pista de pruebas}
+La pista de pruebas tiene proporciones similares a la pista utilizada en la modalidad presencial, aproximadamente 150 m de largo por 100 m de ancho. Consta de un circuito de doble carril (uno para cada sentido), con dos cruces y curvas de diferente radio de curvatura. La línea que divide los carriles es continua en las curvas y segmentada en las partes rectas. La figura \ref{fig:Pista} muestra la pista simulada. 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\textwidth]{Figures/Pista.png}
+  \caption{Pista simulada}
+  \label{fig:Pista}
+\end{figure}
 
 \subsection{Zona de estacionamiento}
+Asimismo, habrá una zona separada de la pista para las pruebas de estacionamiento lateral. La figura \ref{fig:Parking} ilustra las dimensiones utilizadas para modalidad presencial. El espacio simulado tendrá proporciones similares, como se muestra en la figura \ref{fig:ParkingExample}. La banqueta será delimitada por “paredes” con altura suficiente para que pueda ser detectada por los sensores del robot. A diferencia de los años anteriores, el espacio para estacionarse estará delimitado por otros vehículos y no solo por paredes. Para este fin, se utilizarán otros vehículo simulados. 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.95\textwidth]{Figures/Parking.pdf}
+  \caption{Proporciones de la zona de estacionamiento}
+  \label{fig:Parking}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.95\textwidth]{Figures/ParkingExample.png}
+  \caption{Zona de estacionamiento simulada}
+  \label{fig:Parking}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%% REGLAS %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reglas}
+Todas las pruebas se llevarán a cabo dentro de la pista bajo las siguientes reglas:
+\begin{enumerate}
+\item Las pruebas se ejecutarán en la computadora destinada para este fin por el comité organizador. Niguna prueba se ejecutará en la computadora del equipo.
 
+\item Cada equipo deberá subir su código a una rama del repositorio en GitHub (\url{https://github.com/mnegretev/TMR-2022-AutoModelCar}). A cada equipo registrado se le asignará una rama para que pueda subir su código.
+
+\item En cada prueba se descargarán las actualizaciones hechas por el equipo y se ejecutarán. Es responsabilidad del equipo anunciar el procedimiento para la ejecución del código, el cual debe ser simple y preferentemente, con un solo comando.
+
+\item Se realizarán tres intentos por prueba.
+
+\item La pose inicial del automóvil (posición y dirección) será determinada por el comité técnico y podrá ser diferente para cada auto. Esta pose inicial se notificará al equipo en el momento de iniciar su prueba.
+
+\item Si el automóvil participante choca contra algún objeto, persona, automóvil o ambientación dentro o fuera de la pista, la prueba se dará por terminada inmediatamente.
+
+\item No se permiten modificaciones al ambiente de simulación.
+
+\item \textbf{Aunque el simulador permite obtener la posición del vehículo en todo momento, esto no está permitido. La navegación autónoma deberá realizarse con base en la información disponible en los diferentes tópicos publicados por el simulador (cámara, lidar, gps, giroscopio).}
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%% PRUEBAS %%%%%%%%%%%%%%%%%
@@ -139,7 +180,7 @@ Consiste en presentar un póster con la descripción del equipo, característica
 \section{Sistema de puntuación}
 Los principios para establecer la puntuación que un equipo alcanza serán simples:
 \begin{itemize}
-\item Quien concluye el circuito exitósamente en las pruebas 1, 2 y 3, obtiene mayor puntuación que quien no lo termina.
+\item Quien concluye el circuito exitosamente en las pruebas 1, 2 y 3, obtiene mayor puntuación que quien no lo termina.
 \item Los equipos que concluyen exitosamente una prueba se ordenarán de acuerdo al tiempo que requirieron para cubrir el circuito, en orden ascendente.
 \item Se aplicarán penalizaciones en forma de un tiempo predefinido (ver sección \ref{sec:penalties} sobre las sanciones) que se deberá sumar al tiempo total requerido por el equipo para concluir la prueba. 
 \item El menor tiempo ganará la prueba.
