@@ -7,6 +7,7 @@ WorldInfo {
   ERP 0.6
   basicTimeStep 33
   coordinateSystem "NUE"
+  gpsCoordinateSystem "WGS84"
   lineScale 1
   contactProperties [
     ContactProperties {
@@ -71,8 +72,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.5802407316117169 -0.5754031275773746 -0.5763956402965547 4.1822133432668505
-  position 4.787667378164556 186.41266501900773 -0.12132068933803021
+  orientation 0.45394671674624343 -0.8658538272861839 -0.21030817418534412 5.275305665287358
+  position -25.610423684534044 9.517346012365115 -23.66250809767293
   near 1
   follow "vehicle"
   followSmoothness 0
@@ -409,11 +410,22 @@ BmwX5 {
     Lidar {
       translation 0 0.22 0
       rotation 0 -1 0 5.92017e-06
-      horizontalResolution 12858
+      horizontalResolution 3600
       fieldOfView 6.28
       verticalFieldOfView 0.3
       numberOfLayers 32
       maxRange 75
+      noise 0.1
+    }
+    SolidPipe {
+      name "lidar_pipe"
+      height 0.4
+      radius 0.15
+      thickness 0.14
+      appearance PBRAppearance {
+        roughness 0.5
+        metalness 0
+      }
     }
     Camera {
       translation 0 -0.05 -0.72
@@ -439,10 +451,14 @@ BmwX5 {
       fieldOfView 1
       width 640
       height 480
+      noise 0.03
     }
   ]
   sensorsSlotCenter [
     GPS {
+      translationStep 2
+      accuracy 0.1
+      resolution 2
     }
     Gyro {
     }
