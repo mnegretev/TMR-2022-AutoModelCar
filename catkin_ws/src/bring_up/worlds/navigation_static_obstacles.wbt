@@ -72,8 +72,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.45394671674624343 -0.8658538272861839 -0.21030817418534412 5.275305665287358
-  position -25.610423684534044 9.517346012365115 -23.66250809767293
+  orientation 0.5312200406266017 -0.6634169108539758 -0.5269566119042817 4.310240010432988
+  position -6.822880439119256 73.21605332736422 -21.378402748255443
   near 1
   follow "vehicle"
   followSmoothness 0
@@ -408,14 +408,14 @@ BmwX5 {
   controller "bmw_x5_controller"
   sensorsSlotTop [
     Lidar {
-      translation 0 0.22 0
+      translation 0 0.32 0
       rotation 0 -1 0 5.92017e-06
       horizontalResolution 3600
       fieldOfView 6.28
-      verticalFieldOfView 0.3
+      verticalFieldOfView 0.5
       numberOfLayers 32
       maxRange 75
-      noise 0.1
+      noise 0.01
     }
     SolidPipe {
       name "lidar_pipe"

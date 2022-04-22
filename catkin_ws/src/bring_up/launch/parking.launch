@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <env name="WEBOTS_HOME" value="/usr/local/webots"/>
+  <arg name="no_gui" default="false," doc="Start Webots with minimal GUI"/>
+  
+  <include file="$(find webots_ros)/launch/webots.launch">
+    <arg name="mode" value="realtime"/>
+    <arg name="no_gui" value="$(arg no_gui)"/>
+    <arg name="world" value="$(find bring_up)/worlds/parking.wbt"/>
+  </include>
+
+  <node pkg="tf" type="static_transform_publisher" name="car_to_lidar" args="0 1.5 1.0 0 3.1415926 0 car_link lidar_link 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="car_to_camera" args="0 1.2 1.5 0 3.1415926 0 car_link camera_link 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="car_to_gyro" args="0 -0.1 0 0 3.1415926 0 car_link gyro_link 10"/>
+  <node pkg="tf" type="static_transform_publisher" name="car_to_gps" args="0 -0.1 0 0 3.1415926 0 car_link gps_link 10"/>
+  
+</launch>

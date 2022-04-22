@@ -1,0 +1,209 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  info [
+    "Autonomous Vehicle Simulation"
+  ]
+  title "TMR-2022-AutoModelCar"
+  ERP 0.6
+  basicTimeStep 33
+  coordinateSystem "NUE"
+  gpsCoordinateSystem "WGS84"
+  lineScale 1
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "CitroenCZeroWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "ToyotaPriusWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "LincolnMKZWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "RangeRoverSportSVRWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+    ContactProperties {
+      material2 "TruckWheels"
+      coulombFriction [
+        8
+      ]
+      softCFM 1e-05
+      bumpSound ""
+      rollSound ""
+      slideSound ""
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.5288353404405307 -0.6672151710025587 -0.5245541900368107 4.315540305757868
+  position -15.197643985283731 52.437830032498894 -14.783079949827938
+  near 1
+  follow "vehicle"
+  followSmoothness 0
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF GROUND Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.45098 0.823529 0.0862745
+        baseColorMap ImageTexture {
+          url [
+            "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/vehicles/worlds/textures/ground.jpg"
+          ]
+        }
+        roughness 0.5
+        metalness 0
+        textureTransform TextureTransform {
+          scale 500 500
+        }
+      }
+      geometry DEF GROUND_PLANE Plane {
+        size 2000 2000
+      }
+    }
+  ]
+  boundingObject USE GROUND_PLANE
+  locked TRUE
+}
+HighwayPole {
+  translation -41.75 0 -27.02
+  rotation 0 1 0 1.5708
+}
+DEF OBS-2 TeslaModel3Simple {
+  translation -37.31 0.4 -3.51012
+  rotation 0 1 0 -5.307179586466759e-06
+  name "vehicle(4)"
+}
+StraightRoadSegment {
+  translation -35 0.02 -40
+  name "road(10)"
+  width 8
+  lines [
+    RoadLine {
+      width 0.3
+    }
+  ]
+  length 83
+}
+Wall {
+  translation -39.15 0 -8.2
+  rotation 0 1 0 -1.5707953071795862
+  size 40 2.4 0.2
+}
+BmwX5 {
+  translation -33.0957 0.0194761 -34.4343
+  rotation 0.9785348049167835 -0.20608095891516975 -0.000523391895655245 -0.005185307179586651
+  controller "bmw_x5_controller"
+  sensorsSlotTop [
+    Lidar {
+      translation 0 0.32 0
+      rotation 0 -1 0 5.92017e-06
+      horizontalResolution 3600
+      fieldOfView 6.28
+      verticalFieldOfView 0.5
+      numberOfLayers 32
+      maxRange 75
+      noise 0.01
+    }
+    SolidPipe {
+      name "lidar_pipe"
+      height 0.4
+      radius 0.15
+      thickness 0.14
+      appearance PBRAppearance {
+        roughness 0.5
+        metalness 0
+      }
+    }
+    Camera {
+      translation 0 -0.05 -0.72
+      children [
+        Transform {
+          translation 0 0 0.05
+          rotation 1 0 0 1.5708
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.8 0.8 0.8
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.1
+                radius 0.04
+              }
+            }
+          ]
+        }
+      ]
+      fieldOfView 1
+      width 640
+      height 480
+      noise 0.03
+    }
+  ]
+  sensorsSlotCenter [
+    GPS {
+      translationStep 2
+      accuracy 0.1
+      resolution 2
+    }
+    Gyro {
+    }
+    Display {
+      width 200
+      height 150
+    }
+  ]
+}
+DEF OBS-1 LincolnMKZSimple {
+  translation -37.3499 0.4 -18.2
+  rotation 0 -1 0 -5.307179586466759e-06
+  name "vehicle(2)"
+}
+Robot {
+  name "supervisor"
+  controller "supervisor_parking"
+  supervisor TRUE
+}
