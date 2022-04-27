@@ -46,6 +46,14 @@ En cada prueba, el robot inicia en una posición y orientación aleatoria (dentr
 * ``/speed`` (std\_msgs/Float64): Velocidad lineal deseada en [m/s]
 * ``/steering`` (std\_msgs/Float64): Ángulo de las llantas delanteras en [rad]
 
+## Máquina Virtual
+
+Se puede descargar una máquina virtual para [VirtualBox](https://www.virtualbox.org/wiki/Downloads) con todo lo necesario ya instalado de [esta dirección.](https://drive.google.com/drive/folders/1t87Lxv1sRdRwFoKFRD4IFDJBtvQ-UxEx?usp=sharing) <br>
+En esa misma carpeta hay un video con instrucciones para usar la máquina virtual. <br>
+Usuario: Neo <br>
+Contraseña: fidelio
+
+
 ## Contacto
 
 Cualquier duda o comentario sobre esta prueba, escribir al responsable técnico:
