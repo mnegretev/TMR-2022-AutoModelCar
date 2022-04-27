@@ -9,6 +9,7 @@ from controller import Camera, Keyboard, Lidar, Gyro, GPS
 import rospy
 from std_msgs.msg import Float64
 from sensor_msgs.msg import Image, PointCloud2, PointField, NavSatFix, NavSatStatus, Imu
+from rosgraph_msgs.msg import Clock
 
 # CONSTANTS
 TIME_STEP = 33
@@ -106,11 +107,15 @@ def main():
   # SUBSCRIBERS
   rospy.Subscriber('/speed'  , Float64, callback_cruise_speed  )
   rospy.Subscriber('/steering', Float64, callback_steering_angle)
+  clockPublisher = rospy.Publisher('clock', Clock, queue_size=1)
+  timestep = int(driver.getBasicTimeStep())
+  print("Using timestep=" + str(timestep))
 
   # MAIN LOOP
   while driver.step() != -1 and not rospy.is_shutdown():
     msg_image.data = camera.getImage()                                     # GET IMAGE DATA FROM CAMERA
     msg_point_cloud.data = lidar.getPointCloud(data_type='buffer')         # GET POINT CLOUD FROM LIDAR
+    msg_point_cloud.header.stamp = rospy.Time.now()
     msg_gyro.angular_velocity.x = gyro.getValues()[0]                      # GET X COMPONENT FROM GYRO
     msg_gyro.angular_velocity.y = gyro.getValues()[1]                      # GET Y COMPONENT FROM GYRO
     msg_gyro.angular_velocity.z = gyro.getValues()[2]                      # GET Z COMPONENT FROM GYRO
@@ -123,7 +128,12 @@ def main():
     pub_point_cloud.publish(msg_point_cloud)                               # PUBLISHING POINTCLOUD2 MESSAGE
     pub_imu_gyro.publish(msg_gyro)                                         # PUBLISHING IMU MESSAGE
     pub_nav_gps.publish(msg_gps)                                           # PUBLISHING NAVSATFIX MESSAGE
-    
+    msg = Clock()
+    time = driver.getTime()
+    msg.clock.secs = int(time)
+    # round prevents precision issues that can cause problems with ROS timers
+    msg.clock.nsecs = int(round(1000 * (time - msg.clock.secs)) * 1.0e+6)
+    clockPublisher.publish(msg)
     rate.sleep()
     pass
  
