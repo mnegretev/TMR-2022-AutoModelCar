@@ -6,6 +6,7 @@ Este repositorio es el que se utilizará para la categoría AutoModelCar del Tor
 
 * Ubuntu 18.04
 * ROS Melodic
+* Webots 2021b
 
 ## Instalación:
 
