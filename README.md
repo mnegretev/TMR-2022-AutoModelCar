@@ -32,32 +32,22 @@ Una vez instalado y compilado el repositorio, se pueden ejecutar los ambientes d
 
 En cada prueba, el robot inicia en una posición y orientación aleatoria (dentro de un intervalo razonable).
 
-## Tópicos relevantes
+## Iniciar proyecto Autos-LAR
 
-### Tópicos publicados:
+Para que se ejecute sin problemas
 
-* ``/camera/rgb/raw`` (sensor_msgs/Image): Imagen RGB de la cámara
-* ``/point_cloud`` (sensor_msgs/PointCloud2): Nube de puntos generada por el Lidar
-* ``/gps`` (sensor_msgs/NavSatFix): Lectura del GPS
-* ``/gyro`` (sensor_msgs/Imu): Lectura del giroscopio
+* Hacer git pull a la rama Autos-LAR
+* Hacer $ catkin_make
+* Hacer $ source devel/setup.bash
+* Activar el ambiente simulado
+* Ejecutar $rosrun paquete_lar recorre_pista.py
 
-### Tópicos suscritos:
-
-* ``/speed`` (std\_msgs/Float64): Velocidad lineal deseada en [m/s]
-* ``/steering`` (std\_msgs/Float64): Ángulo de las llantas delanteras en [rad]
-
-## Máquina Virtual
-
-Se puede descargar una máquina virtual para [VirtualBox](https://www.virtualbox.org/wiki/Downloads) con todo lo necesario ya instalado de [esta dirección.](https://drive.google.com/drive/folders/1t87Lxv1sRdRwFoKFRD4IFDJBtvQ-UxEx?usp=sharing) <br>
-En esa misma carpeta hay un video con instrucciones para usar la máquina virtual. <br>
-Usuario: Neo <br>
-Contraseña: fidelio
-
+Nota: Utiliza python3 y openCV
 
 ## Contacto
 
-Cualquier duda o comentario sobre esta prueba, escribir al responsable técnico:
+Cualquier duda o comentario sobre este desarrollo, escribir al responsable académico:
 
-Marco Negrete<br>
-marco.negrete@ingenieria.unam.edu
+Miriam Hernández<br>
+lar@acatlan.unam.mx
 
