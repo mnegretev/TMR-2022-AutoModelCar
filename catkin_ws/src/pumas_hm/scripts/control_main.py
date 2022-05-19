@@ -35,7 +35,6 @@ def error_theta(theta_left = goal_left_theta, theta_right = goal_right_theta):
 
 def get_ideal_lanes():
     global left_lines, right_lines, iterator, suma_left_rho, suma_left_theta, suma_right_rho, suma_right_theta
-    print("training")
     if len(left_lines) == 2 and len(right_lines) == 2:
         suma_rho_left = abs(left_lines[0])
         suma_left_theta += abs(left_lines[1])
@@ -80,8 +79,8 @@ def decide():
         spd = 50
         sentido = "C"
     else:
-        spd = 10
-        e_theta = .08
+        spd = 20
+        e_theta = .2
         e_rho = 0
         spd_tmp = 0
         sentido = "NA"
@@ -111,6 +110,7 @@ def main():
     rospy.Subscriber("/raw_lanes_right", Floats, callback_right)
     loop = rospy.Rate(60)
     print("NODE INITIALIZED SUCCESFULLY")
+    print("training")
     while not rospy.is_shutdown() and iterator < 100:
         get_ideal_lanes()
         loop.sleep()

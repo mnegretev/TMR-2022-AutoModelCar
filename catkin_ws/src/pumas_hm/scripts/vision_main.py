@@ -116,7 +116,6 @@ def callback_raw_image(data):
                     prom_left_theta,
                     ]
             if degl - tolerance1 * 2 < prom_left_theta and prom_left_theta < degl + tolerance1 * 2:
-                print("degl cambiado")
                 degl = prom_left_theta
             degrees.append(round( prom_left_theta * const, 4))
         if r != 0:
@@ -127,7 +126,6 @@ def callback_raw_image(data):
                     prom_right_theta
                     ]
             if prom_right_theta >= 100 and prom_right_theta <= 160:
-                print("degr cambiado")
                 degr = prom_right_theta
             degrees.append(round( prom_right_theta * const, 4))
     lanes_to_publish_left = np.array(linesL, dtype=np.float32)
@@ -138,7 +136,7 @@ def callback_raw_image(data):
     degrees_publisher.publish(degrees_to_publish)
 
 def main():
-    print("INITIALIZING NODE")
+    print("INITIALIZING VISION NODE")
     global lanes_to_publish_left, lanes_to_publish_right, lane_publisherL, lane_publisherR, degrees_publisher
     rospy.init_node('raw_img_subscriber', anonymous = True)
     rospy.Subscriber('/camera/rgb/raw', Image, callback_raw_image)
@@ -146,7 +144,7 @@ def main():
     lane_publisherR = rospy.Publisher("/raw_lanes_right", numpy_msg(Floats), queue_size=10)
     degrees_publisher = rospy.Publisher("/combined_degrees", numpy_msg(Floats), queue_size=10)
     loop = rospy.Rate(60)
-    print("NODE INITIALIZED SUCCESFULLY")
+    print("VISION NODE INITIALIZED SUCCESFULLY")
     while not rospy.is_shutdown():
         loop.sleep()
 
