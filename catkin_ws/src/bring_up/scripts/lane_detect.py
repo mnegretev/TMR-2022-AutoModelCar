@@ -133,7 +133,7 @@ def callback_lane_detect(msg):
     width = lane_img.shape[1]                                                   # Y AXIS
     canny_img = canny(lane_img)                                                 # CANNY IMAGE ( EDGES )
     cropped_img = region_of_interest(canny_img)                                 # COPPRED IMAGE ( ONLY INTEREST REGION ) 
-    hough_lines = cv2.HoughLinesP(                                                    # HOUGHP ( LANE LINES )
+    hough_lines = cv2.HoughLinesP(                                              # HOUGHP ( LANE LINES )
             cropped_img,
             2,
             np.pi/180,
@@ -141,19 +141,19 @@ def callback_lane_detect(msg):
             minLineLength=40,
             maxLineGap=50
         )
-    if hough_lines is not None:                                                                   # IF THERE ARE LINES
+    if hough_lines is not None:                                                                     # IF THERE ARE LINES
         avg_borders = avg_slope_intercept(lane_img, hough_lines)                                    # LEFT AND RIGHT LINES AS COORDINATES
         left_border, right_border = avg_borders.reshape(2,4)
-        polar_left_border = calculate_distance_angle(left_border, width, height, True)          # GET DISTANCE AND ANGLE FOR LEFT LINE
-        polar_right_border = calculate_distance_angle(right_border, width, height, False)       # GET DISTANCE AND ANGLE FOR RIGHT LINE
-        # border_img = display_lines(lane_img, avg_borders)                                       # DISPLAY LINES IN A IMAGE
-        # combo_img = cv2.addWeighted(lane_img, 0.8, border_img, 1, 1)                          # LANE_IMG + LINES
-        # cv2.imshow('Result', combo_img)                                                     # DISPLAY IMAGE 
+        polar_left_border = calculate_distance_angle(left_border, width, height, True)              # GET DISTANCE AND ANGLE FOR LEFT LINE
+        polar_right_border = calculate_distance_angle(right_border, width, height, False)           # GET DISTANCE AND ANGLE FOR RIGHT LINE
+        # border_img = display_lines(lane_img, avg_borders)                                         # DISPLAY LINES IN A IMAGE
+        # combo_img = cv2.addWeighted(lane_img, 0.8, border_img, 1, 1)                              # LANE_IMG + LINES
+        # cv2.imshow('Result', combo_img)                                                           # DISPLAY IMAGE 
         # cv2.waitKey(33)
-    else:                                                                                   # IF THERE AREN'T LINES
-        polar_left_border = [0.0,0.0]                                                         # DISTANCE AND ANGLE NOT CALCULATED FOR LEFT LINE
-        polar_right_border = [0.0,0.0]                                                        # DISTANCE AND ANGLE NOT CALCULATED FOR RIGHT LINE
-        # cv2.imshow('Result', lane_img)                                                      # DISPLAY ORIGINAL IMAGE 
+    else:                                                                                           # IF THERE AREN'T LINES
+        polar_left_border = [0.0,0.0]                                                               # DISTANCE AND ANGLE NOT CALCULATED FOR LEFT LINE
+        polar_right_border = [0.0,0.0]                                                              # DISTANCE AND ANGLE NOT CALCULATED FOR RIGHT LINE
+        # cv2.imshow('Result', lane_img)                                                            # DISPLAY ORIGINAL IMAGE 
         # cv2.waitKey(33)
 
 # MAIN FUNCTION

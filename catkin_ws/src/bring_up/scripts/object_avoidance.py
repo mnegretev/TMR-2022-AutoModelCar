@@ -18,14 +18,15 @@ SM_INIT             = 'SM_INIT'
 SM_FINISH           = 'SM_FINISH'
 
 # GLOBAL VARIABLES
-overtake_finished = None
-car_detected = None
+overtake_finished   = None
+car_detected        = None
+safe_distance       = None
 
 # CAR POSE CALLBACK
 def callback_car_pose(msg):
-    global car_detected
+    global car_detected, safe_distance
 
-    if msg.poses[0].position.z != 0.0 and msg.poses[0].position.z > -15.0:
+    if msg.poses[0].position.z != 0.0 and msg.poses[0].position.z > safe_distance:
         car_detected = True
     else:
         car_detected = False
@@ -39,12 +40,16 @@ def callback_overtake_finished(msg):
 
 # MAIN FUNCTION
 def main():
-    global overtake_finished, car_detected
+    global overtake_finished, car_detected, safe_distance
 
     # INIT NODE
     print('Object Avoidance Node...')
     rospy.init_node('object_avoidance')
     rate = rospy.Rate(10)
+
+     # PARAMS
+    if rospy.has_param('/safe_distance'):
+        safe_distance = rospy.get_param('/safe_distance')
 
     # SUBSCRIBERS
     rospy.Subscriber('/object_pose', PoseArray, callback_car_pose)
@@ -60,7 +65,7 @@ def main():
     while not rospy.is_shutdown():
 
         if state == SM_INIT:                                # STATE INIT 
-            print('INIT STATE MACHINE AVOIDANCE')
+            print('INIT SM TO CHOOSE BEHAVIOR')
             state = SM_LANE_TRACKING
 
         elif state == SM_LANE_TRACKING:                     # STATE LANE TRACKING
@@ -84,6 +89,7 @@ def main():
         
         elif state == SM_FINISH:                            # STATE OVERTAKE FINISHED
             overtake_finished = False
+            safe_distance = -15.0
             state = SM_LANE_TRACKING
 
         rate.sleep()
