@@ -65,7 +65,7 @@ marco.negrete@ingenieria.unam.edu
 *Clonar este repositorio
 * Activar la rama de CIDETEC con 
   $ git checkout CIDETEC
-*Ir desde terminal a catkin_ws y ejecutar 
+* Ir desde terminal a catkin_ws y ejecutar 
   $ catkin_make
   $ source devel/setup.bash
 * Cambiar los permisos para permitir ejecución 
