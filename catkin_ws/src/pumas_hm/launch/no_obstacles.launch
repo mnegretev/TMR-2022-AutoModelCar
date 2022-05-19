@@ -1,0 +1,4 @@
+<launch>
+	<node name="vision" pkg="pumas_hm" type="vision_main.py" output="screen"/>
+	<node name="control" pkg="pumas_hm" type="control_main.py" output="screen"/>
+</launch>

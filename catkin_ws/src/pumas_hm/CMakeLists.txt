@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(computer_vision)
+project(pumas_hm)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -7,16 +7,12 @@ project(computer_vision)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-
-## If you have a problem with cv_bridge couldn´t found the /usr/include/opencv/,
-## you can ls the /usr/include/opencv* and copy your current version from opencv
-## e.j /usr/include/opencv4/ to simply opencv, tou just need to type:
-## sudo cp /usr/include/opencv4/ /usr/include/opencv/ but this only works if you
-## installed opencv correctly.
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
+  geometry_msgs
   roscpp
   rospy
+  sensor_msgs
   std_msgs
 )
 
@@ -77,7 +73,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs
+#   geometry_msgs#   sensor_msgs#   std_msgs
 # )
 
 ################################################
@@ -111,8 +107,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES computer_vision
-#  CATKIN_DEPENDS cv_bridge roscpp rospy std_msgs
+#  LIBRARIES pumas_hm
+#  CATKIN_DEPENDS cv_bridge geometry_msgs roscpp rospy sensor_msgs std_msgs
 #  DEPENDS system_lib
 )
 
@@ -129,7 +125,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/computer_vision.cpp
+#   src/${PROJECT_NAME}/pumas_hm.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -140,7 +136,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/computer_vision_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/pumas_hm_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -204,7 +200,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_computer_vision.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_pumas_hm.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
