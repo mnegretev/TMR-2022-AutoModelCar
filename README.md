@@ -61,3 +61,15 @@ Cualquier duda o comentario sobre esta prueba, escribir al responsable técnico:
 Marco Negrete<br>
 marco.negrete@ingenieria.unam.edu
 
+## Instrucciones CIDETEC para realizar la primer prueba de navegación sin obstaculos
+*Clonar este repositorio
+* Activar la rama de CIDETEC con 
+  $ git checkout CIDETEC
+*Ir desde terminal a catkin_ws y ejecutar 
+  $ catkin_make
+  $ source devel/setup.bash
+* Cambiar los permisos para permitir ejecución 
+  $ cd src/bring_up/src
+  $ chmod +x *.py 
+* Ejecutar la simulación con:
+  $ roslaunch bring_up launcher_task1.launch
