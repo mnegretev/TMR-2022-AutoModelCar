@@ -66,10 +66,10 @@ marco.negrete@ingenieria.unam.edu
 * Activar la rama de CIDETEC con 
   $ git checkout CIDETEC
 * Ir desde terminal a catkin_ws y ejecutar 
-  $ catkin_make
+  $ catkin_make \newline
   $ source devel/setup.bash
 * Cambiar los permisos para permitir ejecución 
-  $ cd src/bring_up/src
+  $ cd src/bring_up/src \newline
   $ chmod +x *.py 
 * Ejecutar la simulación con:
   $ roslaunch bring_up launcher_task1.launch
