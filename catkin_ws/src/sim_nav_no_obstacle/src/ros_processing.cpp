@@ -135,7 +135,7 @@ void *ros_processing_threadfunc(void *arg){
 
     double error_rho = obs_rho - best_rho;
 
-    double diff = (obs_rho - 188) * .0022;
+    double diff = (obs_rho - 184) * .0022;
 
     steering = 0 - diff;
 
