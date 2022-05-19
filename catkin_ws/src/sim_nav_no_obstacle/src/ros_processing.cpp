@@ -94,7 +94,11 @@ void *ros_processing_threadfunc(void *arg){
   // This MUST be here
   mssleep(200); 
 
+<<<<<<< HEAD
   double speed = 0;
+=======
+  double speed = 5;
+>>>>>>> 1c17498e2aac724188221c2cab7997d9f73b19be
   double steering = 0;
 
   std_msgs::Float64 steeringMsg;
@@ -102,14 +106,22 @@ void *ros_processing_threadfunc(void *arg){
   pubSteering.publish(steeringMsg);
 
   // This MUST be here
+<<<<<<< HEAD
   mssleep(200); 
+=======
+  mssleep(300); 
+>>>>>>> 1c17498e2aac724188221c2cab7997d9f73b19be
 
   std_msgs::Float64 speedMsg;  
   speedMsg.data = speed;
   pubSpeed.publish(speedMsg);
 
   // This MUST be here
+<<<<<<< HEAD
   mssleep(200); 
+=======
+  mssleep(300); 
+>>>>>>> 1c17498e2aac724188221c2cab7997d9f73b19be
 
   std::cout << "Ros node running..." << std::endl;
   std::cout.flush();
@@ -135,6 +147,7 @@ void *ros_processing_threadfunc(void *arg){
 
     double error_rho = obs_rho - best_rho;
 
+<<<<<<< HEAD
     //double diff = (error_theta * 5 * 55 + error_rho * 3) + diff_error * 6 * 55; //pmw 18
     //double diff = (error_theta * 500); //pmw 18
    double diff = (error_theta * .5);
@@ -147,6 +160,16 @@ void *ros_processing_threadfunc(void *arg){
 
  // steeringMsg.data = steering;
   //pubSteering.publish(steeringMsg);
+=======
+    double diff = (obs_rho - 188) * .0022;
+
+    steering = 0 - diff;
+
+    std::cout << "Steering: " << steering << " error_theta: " << error_theta << " obs_rho: " << obs_rho << std::endl;
+
+  steeringMsg.data = steering;
+  pubSteering.publish(steeringMsg);
+>>>>>>> 1c17498e2aac724188221c2cab7997d9f73b19be
 
     mssleep(200); 
     //loop_rate.sleep(); 
