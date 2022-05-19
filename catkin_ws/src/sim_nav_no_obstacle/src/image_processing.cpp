@@ -253,11 +253,7 @@ void *image_processing_threadfunc(void *){
          mid.x = round((p2.x - p1.x) / 2.0) + p1.x;   
          mid.y = round((p2.y - p1.y) / 2.0) + p1.y;   
 
-<<<<<<< HEAD
-         obs_rho = sqrt((pow(320 - mid.x, 2) + pow(141 - mid.y, 2)));
-=======
          obs_rho = sqrt((pow(320 - mid.x, 2) + pow(480 - mid.y, 2)));
->>>>>>> 1c17498e2aac724188221c2cab7997d9f73b19be
 
 
          } 
@@ -396,11 +392,7 @@ std::vector<cv::Point2f> slidingWindow(cv::Mat image, cv::Mat  windowed,     std
     std::vector<cv::Point2f> points;
     const cv::Size imgSize = image.size();
 
-<<<<<<< HEAD
-    for (int i = 0; i < 4; i++)
-=======
     for (int i = 0; i < 5; i++)
->>>>>>> 1c17498e2aac724188221c2cab7997d9f73b19be
     {
     
         float currentX = windows.at(i).x + windows.at(i).width * 0.5f;

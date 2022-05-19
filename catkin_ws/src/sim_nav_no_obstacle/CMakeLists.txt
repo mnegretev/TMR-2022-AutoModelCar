@@ -45,11 +45,7 @@ find_package(GLUT REQUIRED )
 # )
 
 catkin_package(
-<<<<<<< HEAD
-  INCLUDE_DIRS #include
-=======
   INCLUDE_DIRS include
->>>>>>> 1c17498e2aac724188221c2cab7997d9f73b19be
   LIBRARIES sim_nav_no_obstacle
   CATKIN_DEPENDS roscpp rospy std_msgs image_transport cv_bridge rosgraph_msgs pcl_conversions pcl_ros
 )
