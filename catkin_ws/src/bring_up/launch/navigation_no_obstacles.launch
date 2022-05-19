@@ -18,6 +18,6 @@
   <node name="lane_detect"      pkg="bring_up" type="lane_detect.py"      output="screen" respawn="true"/>
   <node name="lane_tracking"    pkg="bring_up" type="lane_tracking.py"    output="screen" respawn="true"/>
 
-  <param name="/speed" type="double" value="25.0"/>
+  <param name="/speed" type="double" value="30.0"/>
   
 </launch>
