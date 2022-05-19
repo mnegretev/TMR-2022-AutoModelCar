@@ -14,4 +14,14 @@
   <node pkg="tf" type="static_transform_publisher" name="car_to_gyro" args="0 -0.1 0 0 3.1415926 0 car_link gyro_link 10"/>
   <node pkg="tf" type="static_transform_publisher" name="car_to_gps" args="0 -0.1 0 0 3.1415926 0 car_link gps_link 10"/>
   
+  <node name="lane_tracking"    pkg="bring_up" type="lane_tracking.py"    output="screen" respawn="true"/>
+  <node name="lane_detect"      pkg="bring_up" type="lane_detect.py"      output="screen" respawn="true"/>
+  <node name="object_avoidance" pkg="bring_up" type="object_avoidance.py" output="screen" respawn="true"/>
+  <node name="object_detect"    pkg="bring_up" type="object_detect"       output="screen" respawn="true"/>
+  <node name="overtake"         pkg="bring_up" type="overtake.py"         output="screen" respawn="true"/>
+
+  <param name="/dynamic"  type="bool"   value="false"/>
+  <param name="/speed"    type="double" value="30.0"/>
+  <param name="/safe_distance"    type="double" value="-15.0"/>
+
 </launch>

@@ -13,5 +13,10 @@
   <node pkg="tf" type="static_transform_publisher" name="car_to_camera" args="0 1.2 1.5 0 3.1415926 0 car_link camera_link 10"/>
   <node pkg="tf" type="static_transform_publisher" name="car_to_gyro" args="0 -0.1 0 0 3.1415926 0 car_link gyro_link 10"/>
   <node pkg="tf" type="static_transform_publisher" name="car_to_gps" args="0 -0.1 0 0 3.1415926 0 car_link gps_link 10"/>
+
+  <node name="object_parking"   pkg="bring_up" type="object_parking"      output="screen" respawn="true"/>
+  <node name="parking"          pkg="bring_up" type="parking.py"          output="screen" respawn="true"/>
+
+  <param name="/speed" type="double" value="20.0"/>
   
 </launch>
