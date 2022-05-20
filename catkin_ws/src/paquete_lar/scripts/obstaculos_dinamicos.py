@@ -196,7 +196,7 @@ def movimientos():
         direc = -0.27
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(2)
+        time.sleep(1.5)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
@@ -207,7 +207,7 @@ def movimientos():
         direc = 0.25
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(2)
+        time.sleep(1.5)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
@@ -218,7 +218,7 @@ def movimientos():
         direc = 0.0
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(3)
+        time.sleep(2.5)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
@@ -229,7 +229,7 @@ def movimientos():
         direc = 0.22
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(1.7)
+        time.sleep(1.2)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
@@ -240,7 +240,7 @@ def movimientos():
         direc = -0.28
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(1.4)
+        time.sleep(1.0)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
@@ -251,7 +251,7 @@ def movimientos():
         direc = -0.0
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(0.8)
+        time.sleep(0.4)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
