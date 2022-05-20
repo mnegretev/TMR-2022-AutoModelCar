@@ -147,11 +147,11 @@ def main():
             bbox.publish(np.array([8.0, 0.0, 0.5, -1.5, 6.0, -15.0, -10.0], dtype=np.single))
             if iterator < 60:
                 speed_value = 20.0
-                steering_value = -.6
+                steering_value = -.65
                 print("1")
             elif 60 <= iterator < 120:
                 speed_value = 20.0
-                steering_value = .58
+                steering_value = .62
                 print("2")
             elif 120 <= iterator < 250:
 		_, steering_value = decide()
