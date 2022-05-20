@@ -60,7 +60,7 @@ def movimientos():
         mov = 3
     if(mov==3):
         vel = 15.0
-        direc = 0.20
+        direc = 0.098
         Vpub.publish(vel)
         Spub.publish(direc)
         time.sleep(2)
@@ -71,7 +71,7 @@ def movimientos():
         mov = 4
     if(mov==4):
         vel = 15.0
-        direc = -0.28
+        direc = -0.20
         Vpub.publish(vel)
         Spub.publish(direc)
         time.sleep(2)
