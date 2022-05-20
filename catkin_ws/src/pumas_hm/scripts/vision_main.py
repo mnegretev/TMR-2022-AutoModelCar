@@ -85,6 +85,8 @@ def callback_raw_image(data):
     linesC = []
     degrees = []
     if possible_lines is not None:
+        if tolerance1 is not 10:
+            tolerance1 = 10
         const = 180 / math.pi
         l = 0
         r = 0
@@ -122,6 +124,8 @@ def callback_raw_image(data):
                     prom_right_rho,
                     prom_right_theta
                     ]
+    else:
+        tolerance1 += 5
     lanes_to_publish_left = np.array(linesL, dtype=np.float32)
     lanes_to_publish_right = np.array(linesR, dtype=np.float32)
     lane_publisherL.publish(lanes_to_publish_left)
