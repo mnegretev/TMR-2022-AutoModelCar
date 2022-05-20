@@ -38,7 +38,7 @@ SM_ALIGN_LEFT_1         = 'SM_ALIGN_LEFT_1'
 start_overtake      = None
 current_steering    = None
 dynamic             = None
-
+overtake_time       = 65
 
 # CALLBACK ENABLE PASS
 def callback_start_overtake(msg):
@@ -54,7 +54,7 @@ def callback_current_steering(msg):
 # MAIN FUNCTION
 def main():
     
-    global start_overtake, current_steering, dynamic
+    global start_overtake, current_steering, dynamic, overtake_time
     
     print('Overtake Node...')
     rospy.init_node('overtake_node')
@@ -95,47 +95,125 @@ def main():
                     state = SM_TURN_LEFT
             else:
                 state = SM_WAIT_NEW_OVERTAKE
-        
+
+        # INIT PASS ACTION
         elif state == SM_TURN_LEFT:                             # STATE TURN LEFT
-            print('GIRANDO A LA IZQUIERDA')
-            if i > 1:
+            if i > 1:                                           # PARA GIRO EN CURVAS
+                print('GIRANDO A LA IZQUIERDA EN CURVA')
                 pub_steering.publish(current_steering - 0.60)    
                 count = 0
                 state = SM_WAIT_TURN_LEFT_1
-            else:
+            else:                                               # PARA GIRO EN RECTAS
+                print('GIRANDO A LA IZQUIERDA EN RECTA')
                 pub_steering.publish(current_steering - 0.35)
                 count = 0
                 state = SM_WAIT_TURN_LEFT
+        
+        ########### FOR STRAIGHT LINES ##########
+        elif state == SM_WAIT_TURN_LEFT:                        # PRIMER GIRO A LA IZQUIERDA
+            count += 1
+            if count > 7:
+                state = SM_ALIGN_RIGHT
+            else:
+                state = SM_WAIT_TURN_LEFT
 
-        # FOR CURVED LINES
-        elif state == SM_WAIT_TURN_LEFT_1:                        # STATE WAIT TURN LEFT
+        elif state == SM_ALIGN_RIGHT:                            # ALINEA A LA DERECHA
+            print('ALINEANDO DERECHA')
+            pub_steering.publish(current_steering + 0.35)
+            count = 0
+            state = SM_WAIT_ALIGN_RIGHT
+
+        elif state == SM_WAIT_ALIGN_RIGHT:                       # ESPERA ALIENAR A LA DERECHA
+            count += 1
+            if i == 1 and dynamic:                               # PARA REBASE DINÁMICO                  
+                print('REBASANDO')
+                if count > 0:
+                    pub_steering.publish(0.0)
+                    pub_speed.publish(40.0)
+                    x = 0
+                    while x < overtake_time:                    # TIEMPO DE REBASE DIÁMICO
+                        x += 1
+                    state = SM_TURN_RIGHT
+                else: 
+                    state = SM_WAIT_ALIGN_RIGHT
+            else:                                               # PARA REBASE ESTÁTICO
+                if count > 0:
+                    state = SM_TURN_RIGHT
+                else:
+                    state = SM_WAIT_ALIGN_RIGHT
+
+        elif state == SM_TURN_RIGHT:                            # SEGUNDO GIRO A LA IZQUIERDA
+            print('GIRANDO A LA DERECHA')
+            pub_steering.publish(current_steering + 0.6)
+            count = 0
+            state = SM_WAIT_TURN_RIGHT
+        
+        elif state == SM_WAIT_TURN_RIGHT:                       # ESPERA EL SEGUNDO GIRO A LA DERECHA
+            count += 1
+            if count > 8:
+                state = SM_ALIGN_LEFT
+            else:
+                state = SM_WAIT_TURN_RIGHT
+        
+        elif state == SM_ALIGN_LEFT:                            # ALINEA A LA IZQUIERDA
+            print('ALINEADO IZQUIERDA')
+            pub_steering.publish(current_steering - 0.6)
+            count = 0
+            state = SM_WAIT_ALIGN_LEFT
+
+        elif state == SM_WAIT_ALIGN_LEFT:                      # ESPERA ALINEADO A LA IZQUIERDA
+            count += 1
+            if count > 5:
+                state = SM_GO_STRAIGHT
+            else:
+                state = SM_WAIT_ALIGN_LEFT
+
+
+        elif state == SM_GO_STRAIGHT:                           # AVANZA EN LÍNEA RECTA
+            print('AVANZANDO')
+            pub_steering.publish(0.0)
+            pub_speed.publish(0.0)
+            count = 0
+            state = SM_WAIT_GO_STRAIGHT
+
+        
+        elif state == SM_WAIT_GO_STRAIGHT:                      # ESPERA AVANZAR EN LÍNEA RECTA
+            count += 1
+            if count > 0:
+                state = SM_FINISH_OVERTAKE
+            else:
+                state = SM_WAIT_GO_STRAIGHT
+
+
+        ########### FOR CURVED LINES ##########
+        elif state == SM_WAIT_TURN_LEFT_1:                      # GIRAR A LA IZQUIERDA              
             count += 1
             if count > 7:
                 state = SM_ALIGN_RIGHT_1
             else:
                 state = SM_WAIT_TURN_LEFT_1
 
-        elif state == SM_ALIGN_RIGHT_1:                            # STATE TURN RIGHT
-            print('ALINEANDO DERECHA')
+        elif state == SM_ALIGN_RIGHT_1:                            
+            print('ALINEANDO DERECHA')                          # ALINEAR A LA DERECHA
             pub_steering.publish(current_steering + 1.40)
             count = 0
             state = SM_WAIT_ALIGN_RIGHT_1
 
-        elif state == SM_WAIT_ALIGN_RIGHT_1:                       # STATE WAIT TURN RIGHT
+        elif state == SM_WAIT_ALIGN_RIGHT_1:                       
             count += 1
             if count > 7:
                 state = SM_ALIGN_LEFT_1
             else:
                 state = SM_WAIT_ALIGN_RIGHT_1
 
-        elif state == SM_ALIGN_LEFT_1:                           # STATE TURN LEFT 2
-            print('ALINEADO IZQUIERDA')
+        elif state == SM_ALIGN_LEFT_1:                           
+            print('ALINEADO IZQUIERDA')                         # ALINEAR A LA IZQUIERDA
             #pub_steering.publish(current_steering - 0.6)
             pub_steering.publish(-0.4)
             count = 0
             state = SM_WAIT_ALIGN_LEFT_1
 
-        elif state == SM_WAIT_ALIGN_LEFT_1:                      # STATE WAIT TURN LEFT 2
+        elif state == SM_WAIT_ALIGN_LEFT_1:                      
             count += 1
             if count > 6:
                 state = SM_GO_STRAIGHT_1
@@ -144,7 +222,7 @@ def main():
 
 
         elif state == SM_GO_STRAIGHT_1:
-            print('AVANZANDO')
+            print('AVANZANDO')                                  # AVANZAR
             pub_steering.publish(0.0)
             pub_speed.publish(0.0)
             count = 0
@@ -158,83 +236,8 @@ def main():
             else:
                 state = SM_WAIT_GO_STRAIGHT_1
 
-        
-        # FOR STRAIGHT LINES
-        elif state == SM_WAIT_TURN_LEFT:                        # STATE WAIT TURN LEFT
-            count += 1
-            if count > 7:
-                state = SM_ALIGN_RIGHT
-            else:
-                state = SM_WAIT_TURN_LEFT
 
-        elif state == SM_ALIGN_RIGHT:                            # STATE TURN RIGHT
-            print('ALINEANDO DERECHA')
-            pub_steering.publish(current_steering + 0.35)
-            count = 0
-            state = SM_WAIT_ALIGN_RIGHT
-
-        elif state == SM_WAIT_ALIGN_RIGHT:                       # STATE WAIT TURN RIGHT
-            count += 1
-
-            if i == 1 and dynamic:
-                print('REBASANDO')
-                if count > 0:
-                    pub_steering.publish(0.0)
-                    pub_speed.publish(30.0)
-                    x = 0
-                    while x < 65:
-                        x += 1
-                    state = SM_TURN_RIGHT
-                else: 
-                    state = SM_WAIT_ALIGN_RIGHT
-            else:
-                if count > 0:
-                    state = SM_TURN_RIGHT
-                else:
-                    state = SM_WAIT_ALIGN_RIGHT
-
-        elif state == SM_TURN_RIGHT:                          # STATE TURN RIGHT 2
-            print('GIRANDO A LA DERECHA')
-            pub_steering.publish(current_steering + 0.6)
-            count = 0
-            state = SM_WAIT_TURN_RIGHT
-        
-        elif state == SM_WAIT_TURN_RIGHT:                     # STATE WAIT TURN RIGHT 2
-            count += 1
-            if count > 8:
-                state = SM_ALIGN_LEFT
-            else:
-                state = SM_WAIT_TURN_RIGHT
-        
-        elif state == SM_ALIGN_LEFT:                           # STATE TURN LEFT 2
-            print('ALINEADO IZQUIERDA')
-            pub_steering.publish(current_steering - 0.6)
-            count = 0
-            state = SM_WAIT_ALIGN_LEFT
-
-        elif state == SM_WAIT_ALIGN_LEFT:                      # STATE WAIT TURN LEFT 2
-            count += 1
-            if count > 5:
-                state = SM_GO_STRAIGHT
-            else:
-                state = SM_WAIT_ALIGN_LEFT
-
-
-        elif state == SM_GO_STRAIGHT:
-            print('AVANZANDO')
-            pub_steering.publish(0.0)
-            pub_speed.publish(0.0)
-            count = 0
-            state = SM_WAIT_GO_STRAIGHT
-
-        
-        elif state == SM_WAIT_GO_STRAIGHT:
-            count += 1
-            if count > 0:
-                state = SM_FINISH_OVERTAKE
-            else:
-                state = SM_WAIT_GO_STRAIGHT
-
+        # FINISH OVRETAKE
         elif state == SM_FINISH_OVERTAKE:                       # STATE FINISH OVERTAKE
             pub_overtake_finished.publish(True)
             state = SM_WAIT_NEW_OVERTAKE

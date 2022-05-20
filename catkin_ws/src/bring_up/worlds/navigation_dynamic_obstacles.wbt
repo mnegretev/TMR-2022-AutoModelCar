@@ -5,7 +5,7 @@ WorldInfo {
   ]
   title "TMR-2022-AutoModelCar"
   ERP 0.6
-  basicTimeStep 100
+  basicTimeStep 33
   coordinateSystem "NUE"
   gpsCoordinateSystem "WGS84"
   lineScale 1
@@ -72,8 +72,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.5312200406266017 -0.6634169108539758 -0.5269566119042817 4.310240010432988
-  position -6.822880439119256 73.21605332736422 -21.378402748255443
+  orientation 0.5692676257450191 -0.5962719486956788 -0.5660336858149758 4.212376596012119
+  position 17.60223613428717 252.442482799729 -7.625647482073535
   near 1
   follow "vehicle"
   followSmoothness 0
@@ -327,6 +327,11 @@ CurvedRoadSegment {
   ]
   curvatureRadius 20.5
 }
+ToyotaPriusSimple {
+  translation 17.1038 0.4 -39.9661
+  rotation 0 1 0 -2.6179953071795863
+  name "vehicle(5)"
+}
 StraightRoadSegment {
   translation -4.5 0.01 -70.6
   rotation 0 1 0 1.5708
@@ -377,8 +382,23 @@ CurvedRoadSegment {
   curvatureRadius 30.5
 }
 BmwX5 {
-  translation -36.9632 0.0282515 -32.6809
-  rotation -0.9785174180294364 0.2061634999938847 0.0005233385869732009 0.005188375975700859
+  hidden position_0_0 0.00037089836359839454
+  hidden position2_0_0 0.5114376471681359
+  hidden position_0_1 0.00037096452191751923
+  hidden position2_0_1 0.5114349563596184
+  hidden position_0_2 0.47960850033104235
+  hidden position_0_3 0.47957285590329546
+  hidden position_0_8 0.003845168008857559
+  hidden position_0_9 0.051214513647500834
+  hidden rotation_1 0.0007093302516421664 0.9999997312295702 0.00018544913408189272 0.5114377787128672
+  hidden rotation_2 -0.0007094606775543952 -0.9999997311309117 0.00018548221321540277 0.5114350879520059
+  hidden rotation_3 0 1 0 0.47960850033104235
+  hidden rotation_4 0 -0.9999999999999999 0 0.47957285590329585
+  hidden rotation_25 0 -0.32059617431688325 0.9472159695726096 0.0038451680088955396
+  hidden translation_26 0.10216189086735311 -0.017686687824956193 -0.015757230971325864
+  hidden rotation_26 0 -0.6652060421485012 0.7466598432279096 0.05121451364749773
+  translation -36.96301358758773 0.21589192925878753 -32.50293814598701
+  rotation -0.9954510454844052 0.09527442442769955 9.694076434493884e-06 0.011140065352589686
   controller "bmw_x5_controller"
   sensorsSlotTop [
     Lidar {
@@ -442,28 +462,14 @@ BmwX5 {
     }
   ]
 }
-DEF OBS-5 TeslaModel3Simple {
-  translation 19.43 0.4 5.15589e-05
-  rotation 0 1 0 3.14159
-  name "vehicle(4)"
-}
 DEF OBS-4 RangeRoverSportSVRSimple {
   translation -20.5549 0.4 47.1554
   rotation 0 1 0 0.785398
   name "vehicle(3)"
 }
 DEF OBS-1 CitroenCZeroSimple {
-  translation -36.89 0.4 -10.45
+  translation -36.89 0.4 -8.700604543635961
   name "vehicle(1)"
-}
-DEF OBS-2 LincolnMKZSimple {
-  translation 9.3403 0.4 75.57
-  rotation 0 1 0 1.5708
-  name "vehicle(2)"
-}
-DEF OBS-3 MercedesBenzSprinterSimple {
-  translation 10.31 0.4 10.6
-  rotation 0 1 0 -1.5707953071795862
 }
 Robot {
   name "supervisor"
