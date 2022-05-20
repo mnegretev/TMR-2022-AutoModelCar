@@ -39,7 +39,8 @@ class Control:
 
     # CONPUTE STEERING ANGLE BY SIDE
     def compute_steering_angle(self, left_border, right_border, side):
-        kd = 0.0046                                                                  # CONSTANT FOR DISTANCE ERROR
+        #kd = 0.0046                                                                  # CONSTANT FOR DISTANCE ERROR
+        kd = 0.0023                                                                  # CONSTANT FOR DISTANCE ERROR
         ka = 0.01                                                                   # CONSTANT FOR ANGLE ERROR
     
         detected_distance, detected_angle = [0.0, 0.0]                              # INITIAL STATE FOR DETECTED MEASURES

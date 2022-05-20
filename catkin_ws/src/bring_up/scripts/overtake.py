@@ -161,7 +161,7 @@ def main():
         # FOR STRAIGHT LINES
         elif state == SM_WAIT_TURN_LEFT:                        # STATE WAIT TURN LEFT
             count += 1
-            if count > 10:
+            if count > 7:
                 state = SM_ALIGN_RIGHT
             else:
                 state = SM_WAIT_TURN_LEFT
