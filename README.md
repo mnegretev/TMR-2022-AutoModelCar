@@ -61,7 +61,7 @@ Cualquier duda o comentario sobre esta prueba, escribir al responsable técnico:
 Marco Negrete<br>
 marco.negrete@ingenieria.unam.edu
 
-## Instrucciones CIDETEC para realizar la primer prueba de navegación sin obstaculos
+## Instrucciones CIDETEC para realizar la primer prueba: Navegación sin obstaculos
 *Clonar este repositorio
 * Activar la rama de CIDETEC con: \
   $ git checkout CIDETEC
@@ -73,3 +73,15 @@ marco.negrete@ingenieria.unam.edu
   $ chmod +x *.py 
 * Ejecutar la simulación con: \
   $ roslaunch bring_up launcher_task1.launch
+
+## Instrucciones CIDETEC para realizar la segunda prueba: Navegación con obstaculos estáticos
+
+ * Actualizar el paquete de PIP con: \
+  $ pip install -U pip>=20.3
+ * Instalar Open3D con: \
+  $ pip install open3d
+ * Instalar scikit learn con: \
+  $ pip install sklearn
+ * Ejecutar la prueba con: \
+  $ roslaunch bring_up launcher_task2.launch
+
