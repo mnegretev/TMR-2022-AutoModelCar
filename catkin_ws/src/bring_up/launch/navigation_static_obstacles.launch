@@ -21,7 +21,7 @@
   <node name="overtake"         pkg="bring_up" type="overtake.py"         output="screen" respawn="true"/>
 
   <param name="/dynamic"  type="bool"   value="false"/>
-  <param name="/speed"    type="double" value="45.0"/>
+  <param name="/speed"    type="double" value="40.0"/>
   <param name="/safe_distance"    type="double" value="-15.0"/>
 
 </launch>

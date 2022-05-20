@@ -110,33 +110,34 @@ def main():
         # FOR CURVED LINES
         elif state == SM_WAIT_TURN_LEFT_1:                        # STATE WAIT TURN LEFT
             count += 1
-            if count > 10:
+            if count > 7:
                 state = SM_ALIGN_RIGHT_1
             else:
                 state = SM_WAIT_TURN_LEFT_1
 
         elif state == SM_ALIGN_RIGHT_1:                            # STATE TURN RIGHT
             print('ALINEANDO DERECHA')
-            pub_steering.publish(current_steering + 1.20)
+            pub_steering.publish(current_steering + 1.40)
             count = 0
             state = SM_WAIT_ALIGN_RIGHT_1
 
         elif state == SM_WAIT_ALIGN_RIGHT_1:                       # STATE WAIT TURN RIGHT
             count += 1
-            if count > 6:
+            if count > 7:
                 state = SM_ALIGN_LEFT_1
             else:
                 state = SM_WAIT_ALIGN_RIGHT_1
 
         elif state == SM_ALIGN_LEFT_1:                           # STATE TURN LEFT 2
             print('ALINEADO IZQUIERDA')
-            pub_steering.publish(current_steering - 0.6)
+            #pub_steering.publish(current_steering - 0.6)
+            pub_steering.publish(-0.4)
             count = 0
             state = SM_WAIT_ALIGN_LEFT_1
 
         elif state == SM_WAIT_ALIGN_LEFT_1:                      # STATE WAIT TURN LEFT 2
             count += 1
-            if count > 3:
+            if count > 6:
                 state = SM_GO_STRAIGHT_1
             else:
                 state = SM_WAIT_ALIGN_LEFT_1
