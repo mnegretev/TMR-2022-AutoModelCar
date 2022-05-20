@@ -23,7 +23,7 @@ k_size_y = 5
 k_size_x = 5
 votes = 35
 degl = 44
-degr = 132
+degr = 134
 tolerance1 = 10
 tolerance2 = 20
 left_rho_goal = 392
@@ -75,7 +75,7 @@ def callback_raw_image(data):
     raw_frame = brdg.imgmsg_to_cv2(data)
     coppied_frame = np.copy(raw_frame)
     gray_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BGR2GRAY)
-    cannied_frame, blured_frame = canny_frame(gray_frame) #10i
+    cannied_frame, blured_frame = canny_frame(gray_frame)
     kernel = np.ones((2, 1), np.uint8)
     cannied_frame = cv2.erode(cannied_frame, kernel)
     interest_frame = crop_frame(cannied_frame, raw_frame.shape) #15
