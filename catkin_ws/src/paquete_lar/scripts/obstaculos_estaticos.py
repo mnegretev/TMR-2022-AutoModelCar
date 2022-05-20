@@ -30,14 +30,14 @@ def movimientos():
         direc = -0.25
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(3)
+        time.sleep(2)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
         Spub.publish(direc)
         mov = 1
     if(mov==1):
-        vel = 20.0
+        vel = 15.0
         direc = 0.30
         Vpub.publish(vel)
         Spub.publish(direc)
