@@ -5,7 +5,7 @@ WorldInfo {
   ]
   title "TMR-2022-AutoModelCar"
   ERP 0.6
-  basicTimeStep 33
+  basicTimeStep 100
   coordinateSystem "NUE"
   gpsCoordinateSystem "WGS84"
   lineScale 1

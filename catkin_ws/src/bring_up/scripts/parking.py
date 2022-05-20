@@ -80,6 +80,84 @@ def main():
 
     while not rospy.is_shutdown():
 
+        # # STATE MACHINE TO PARKING
+        # if state == SM_INIT:                        # STATE INIT
+        #     pub_speed.publish(speed)
+        #     if start_parking:
+        #         state = SM_BREAK
+        #     else:
+        #         state = SM_INIT
+
+        # elif state == SM_BREAK:                     # STATE BREAK
+        #     pub_speed.publish(0.0)
+        #     count = 0
+        #     state = SM_WAIT_BREAK
+        
+        # elif state == SM_WAIT_BREAK:                # STATE WAIT BREAK
+        #     count += 1
+        #     if count > 10:
+        #         state = SM_GO_BACK
+        #     else:
+        #         state = SM_WAIT_BREAK
+        
+        # elif state == SM_GO_BACK:                   # STATE GO BACK
+        #     count = 0
+        #     pub_speed.publish(-10.0)
+        #     state = SM_WAIT_GO_BACK
+
+        # elif state == SM_WAIT_GO_BACK:              # STATE WAIT GO BACK
+        #     count += 1
+        #     if count > 20:
+        #         state = SM_TURN_RIGHT
+        #     else:
+        #         state = SM_WAIT_GO_BACK
+
+        # elif state == SM_TURN_RIGHT:                # STATE TURN RIGHT BACK
+        #     count = 0
+        #     pub_steering.publish(0.4)
+        #     state = SM_WAIT_TURN_RIGHT
+
+        # elif state == SM_WAIT_TURN_RIGHT:           # STATE WAIT TURN RIGHT BACK
+        #     count += 1
+        #     if count > 20:
+        #         state = SM_TURN_LEFT
+        #     else: 
+        #         state = SM_WAIT_TURN_RIGHT
+        
+        # elif state == SM_TURN_LEFT:                 # STATE TURN LEFT BACK
+        #     count = 0
+        #     pub_steering.publish(-0.4)
+        #     state = SM_WAIT_TURN_LEFT
+
+        # elif state == SM_WAIT_TURN_LEFT:            # STATE WAIT TURN LEFT BACK
+        #     count += 1
+        #     if count > 20:
+        #         state = SM_GO_FORWARD
+        #     else:
+        #         state = SM_WAIT_TURN_LEFT
+
+        # elif state == SM_GO_FORWARD:                # STATE GO FORWARD
+        #     count = 0
+        #     pub_steering.publish(0.0)
+        #     pub_speed.publish(10.0)
+        #     state = SM_WAIT_GO_FORWARD
+
+        # elif state == SM_WAIT_GO_FORWARD:           # STATE WAIT GO FORWARD
+        #     count += 1
+        #     if count > 10:
+        #         state = SM_FINISH_PARKING
+        #     else:
+        #         state = SM_WAIT_GO_FORWARD
+
+        # elif state == SM_FINISH_PARKING:            # STATE FINISH PARKING
+        #     count = 0
+        #     pub_speed.publish(0.0)
+        #     pub_steering.publish(0.0)
+        #     speed = 0.0
+        #     start_parking = False
+        #     state = SM_INIT
+
+
         # STATE MACHINE TO PARKING
         if state == SM_INIT:                        # STATE INIT
             pub_speed.publish(speed)
@@ -92,14 +170,14 @@ def main():
             pub_speed.publish(0.0)
             count = 0
             state = SM_WAIT_BREAK
-        
+
         elif state == SM_WAIT_BREAK:                # STATE WAIT BREAK
             count += 1
             if count > 10:
                 state = SM_GO_BACK
             else:
                 state = SM_WAIT_BREAK
-        
+
         elif state == SM_GO_BACK:                   # STATE GO BACK
             count = 0
             pub_speed.publish(-10.0)
@@ -107,7 +185,7 @@ def main():
 
         elif state == SM_WAIT_GO_BACK:              # STATE WAIT GO BACK
             count += 1
-            if count > 20:
+            if count > 5:
                 state = SM_TURN_RIGHT
             else:
                 state = SM_WAIT_GO_BACK
@@ -123,7 +201,7 @@ def main():
                 state = SM_TURN_LEFT
             else: 
                 state = SM_WAIT_TURN_RIGHT
-        
+
         elif state == SM_TURN_LEFT:                 # STATE TURN LEFT BACK
             count = 0
             pub_steering.publish(-0.4)
@@ -157,6 +235,7 @@ def main():
             start_parking = False
             state = SM_INIT
 
+
         rate.sleep()
 
     
@@ -166,3 +245,5 @@ if __name__ == '__main__':
         main()
     except:
         rospy.ROSInterruptException
+
+

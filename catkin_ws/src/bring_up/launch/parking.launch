@@ -17,6 +17,7 @@
   <node name="object_parking"   pkg="bring_up" type="object_parking"      output="screen" respawn="true"/>
   <node name="parking"          pkg="bring_up" type="parking.py"          output="screen" respawn="true"/>
 
-  <param name="/speed" type="double" value="20.0"/>
+  <!-- <param name="/speed" type="double" value="20.0"/> -->
+  <param name="/speed" type="double" value="10.0"/>
   
 </launch>

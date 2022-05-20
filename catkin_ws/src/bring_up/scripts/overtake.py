@@ -22,7 +22,7 @@ SM_ALIGN_RIGHT          = 'SM_ALIGN_RIGHT'
 SM_ALIGN_LEFT           = 'SM_ALIGN_LEFT'
 SM_START                = 'SM_START'
 
-
+# FOR CURVED LINES
 SM_WAIT_ALIGN_RIGHT_1   = 'SM_WAIT_ALIGN_RIGHT_1'
 SM_WAIT_GO_STRAIGHT_1   = 'SM_WAIT_GO_STRAIGHT_1'
 SM_WAIT_ALIGN_LEFT_1    = 'SM_WAIT_ALIGN_LEFT_1'
@@ -107,6 +107,7 @@ def main():
                 count = 0
                 state = SM_WAIT_TURN_LEFT
 
+        # FOR CURVED LINES
         elif state == SM_WAIT_TURN_LEFT_1:                        # STATE WAIT TURN LEFT
             count += 1
             if count > 10:
@@ -157,7 +158,7 @@ def main():
                 state = SM_WAIT_GO_STRAIGHT_1
 
         
-
+        # FOR STRAIGHT LINES
         elif state == SM_WAIT_TURN_LEFT:                        # STATE WAIT TURN LEFT
             count += 1
             if count > 10:
