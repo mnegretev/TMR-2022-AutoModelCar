@@ -157,10 +157,10 @@ def main():
 
         elif state == SM_WAIT_GO:                       
             count += 1
-            if count > 10:
+            if count > 8:
                 state = SM_TURN_RIGHT
             else:
-                state = SM_GO
+                state = SM_WAIT_GO
 
         elif state == SM_TURN_RIGHT:                            # SEGUNDO GIRO A LA IZQUIERDA
             print('GIRANDO A LA DERECHA')
