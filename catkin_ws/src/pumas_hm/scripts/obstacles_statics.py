@@ -34,7 +34,6 @@ def callback_cloud(msg):
         if n_pos > 0:
             z_pos /= n_pos
         distance = -20.0
-        print(z_pos)
         if distance < z_pos < 0:
             pub.publish(True)
         else:
