@@ -30,6 +30,8 @@ SM_WAIT_TURN_LEFT_1     = 'SM_WAIT_TURN_LEFT_1'
 SM_ALIGN_RIGHT_1        = 'SM_ALIGN_RIGHT_1'
 SM_GO_STRAIGHT_1        = 'SM_GO_STRAIGHT_1'
 SM_ALIGN_LEFT_1         = 'SM_ALIGN_LEFT_1'
+SM_GO = 'SM_GO'
+SM_WAIT_GO = 'SM_WAIT_GO'
 
 
 
@@ -125,22 +127,40 @@ def main():
 
         elif state == SM_WAIT_ALIGN_RIGHT:                       # ESPERA ALIENAR A LA DERECHA
             count += 1
-            if i == 1 and dynamic:                               # PARA REBASE DINÁMICO                  
-                print('REBASANDO')
-                if count > 0:
-                    pub_steering.publish(0.0)
-                    pub_speed.publish(40.0)
-                    x = 0
-                    while x < overtake_time:                    # TIEMPO DE REBASE DIÁMICO
-                        x += 1
-                    state = SM_TURN_RIGHT
-                else: 
-                    state = SM_WAIT_ALIGN_RIGHT
-            else:                                               # PARA REBASE ESTÁTICO
-                if count > 0:
-                    state = SM_TURN_RIGHT
-                else:
-                    state = SM_WAIT_ALIGN_RIGHT
+            if count > 0:
+                state = SM_GO
+            else:
+                state = SM_WAIT_ALIGN_RIGHT
+            # if i == 1 and dynamic:                               # PARA REBASE DINÁMICO                  
+            #     print('REBASANDO')
+            #     if count > 0:
+            #         pub_steering.publish(0.0)
+            #         pub_speed.publish(40.0)
+            #         x = 0
+            #         while x < overtake_time:                    # TIEMPO DE REBASE DIÁMICO
+            #             x += 1
+            #         state = SM_TURN_RIGHT
+            #     else: 
+            #         state = SM_WAIT_ALIGN_RIGHT
+            # else:                                               # PARA REBASE ESTÁTICO
+            #     if count > 0:
+            #         state = SM_TURN_RIGHT
+            #     else:
+            #         state = SM_WAIT_ALIGN_RIGHT
+
+        elif state == SM_GO:
+            print('ADELANTE')
+            pub_steering.publish(0.0)
+            pub_speed.publish(40.0)
+            count = 0
+            state = SM_WAIT_GO
+
+        elif state == SM_WAIT_GO:                       
+            count += 1
+            if count > 10:
+                state = SM_TURN_RIGHT
+            else:
+                state = SM_GO
 
         elif state == SM_TURN_RIGHT:                            # SEGUNDO GIRO A LA IZQUIERDA
             print('GIRANDO A LA DERECHA')
