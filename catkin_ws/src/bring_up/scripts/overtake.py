@@ -114,7 +114,7 @@ def main():
         ########### FOR STRAIGHT LINES ##########
         elif state == SM_WAIT_TURN_LEFT:                        # PRIMER GIRO A LA IZQUIERDA
             count += 1
-            if count > 7:
+            if count > 6:
                 state = SM_ALIGN_RIGHT
             else:
                 state = SM_WAIT_TURN_LEFT
@@ -127,7 +127,7 @@ def main():
 
         elif state == SM_WAIT_ALIGN_RIGHT:                       # ESPERA ALIENAR A LA DERECHA
             count += 1
-            if count > 0:
+            if count > 1:
                 state = SM_GO
             else:
                 state = SM_WAIT_ALIGN_RIGHT
@@ -151,7 +151,7 @@ def main():
         elif state == SM_GO:
             print('ADELANTE')
             pub_steering.publish(0.0)
-            pub_speed.publish(40.0)
+            pub_speed.publish(25.0)
             count = 0
             state = SM_WAIT_GO
 
