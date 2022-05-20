@@ -151,11 +151,11 @@ def main():
                 print("1")
             elif 60 <= iterator < 120:
                 speed_value = 20.0
-                steering_value = .6
+                steering_value = .58
                 print("2")
             elif 120 <= iterator < 250:
 		_, steering_value = decide()
-                speed_value = 25.0
+                speed_value = 20.0
                 print("3")
             elif 250 <= iterator < 310:
                 steering_value = .44
