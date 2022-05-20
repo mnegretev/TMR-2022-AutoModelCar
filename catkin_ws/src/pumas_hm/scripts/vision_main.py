@@ -23,7 +23,7 @@ k_size_y = 5
 k_size_x = 5
 votes = 35
 degl = 44
-degr = 132
+degr = 127
 tolerance1 = 10
 tolerance2 = 20
 left_rho_goal = 392
@@ -75,7 +75,7 @@ def callback_raw_image(data):
     raw_frame = brdg.imgmsg_to_cv2(data)
     coppied_frame = np.copy(raw_frame)
     gray_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BGR2GRAY)
-    cannied_frame, blured_frame = canny_frame(gray_frame) #10i
+    cannied_frame, blured_frame = canny_frame(gray_frame)
     kernel = np.ones((2, 1), np.uint8)
     cannied_frame = cv2.erode(cannied_frame, kernel)
     interest_frame = crop_frame(cannied_frame, raw_frame.shape) #15
@@ -115,10 +115,6 @@ def callback_raw_image(data):
                     prom_left_rho,
                     prom_left_theta,
                     ]
-            if degl - tolerance1 * 2 < prom_left_theta and prom_left_theta < degl + tolerance1 * 2:
-                print("degl cambiado")
-                degl = prom_left_theta
-            degrees.append(round( prom_left_theta * const, 4))
         if r != 0:
             prom_right_rho = right_rho / r
             prom_right_theta = right_theta / r
@@ -126,19 +122,13 @@ def callback_raw_image(data):
                     prom_right_rho,
                     prom_right_theta
                     ]
-            if prom_right_theta >= 100 and prom_right_theta <= 160:
-                print("degr cambiado")
-                degr = prom_right_theta
-            degrees.append(round( prom_right_theta * const, 4))
     lanes_to_publish_left = np.array(linesL, dtype=np.float32)
     lanes_to_publish_right = np.array(linesR, dtype=np.float32)
-    degrees_to_publish = np.array(degrees, dtype=np.float32)
     lane_publisherL.publish(lanes_to_publish_left)
     lane_publisherR.publish(lanes_to_publish_right)
-    degrees_publisher.publish(degrees_to_publish)
 
 def main():
-    print("INITIALIZING NODE")
+    print("INITIALIZING VISION NODE")
     global lanes_to_publish_left, lanes_to_publish_right, lane_publisherL, lane_publisherR, degrees_publisher
     rospy.init_node('raw_img_subscriber', anonymous = True)
     rospy.Subscriber('/camera/rgb/raw', Image, callback_raw_image)
@@ -146,7 +136,7 @@ def main():
     lane_publisherR = rospy.Publisher("/raw_lanes_right", numpy_msg(Floats), queue_size=10)
     degrees_publisher = rospy.Publisher("/combined_degrees", numpy_msg(Floats), queue_size=10)
     loop = rospy.Rate(60)
-    print("NODE INITIALIZED SUCCESFULLY")
+    print("VISION NODE INITIALIZED SUCCESFULLY")
     while not rospy.is_shutdown():
         loop.sleep()
 
