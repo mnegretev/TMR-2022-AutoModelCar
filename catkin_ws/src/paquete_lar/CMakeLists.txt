@@ -165,6 +165,7 @@ include_directories(
  catkin_install_python(PROGRAMS
    scripts/recorre_pista.py
    scripts/obstaculos_estaticos.py
+   scripts/obstaculos_dinamicos.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
