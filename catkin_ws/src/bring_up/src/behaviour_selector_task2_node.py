@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-import math
-from timeit import timeit
+import random
+from random import uniform
 import numpy as np
 import rospy
 from std_msgs.msg import Float32MultiArray, Int16
@@ -145,7 +145,7 @@ def lane_angle_callback(message):
     if current_sit == situation["Free"]:
 
         qg = Float32MultiArray(data = goal)
-	pub.publish(qg)
+        pub.publish(qg)
 
     elif current_sit == situation["Blocked"]:
         #inicio rebase
@@ -169,16 +169,20 @@ def lane_angle_callback(message):
         qg = [g_x, g_y, 0.0]
         
         qg = Float32MultiArray(data = qg)
-	pub.publish(qg)
+        pub.publish(qg)
 
         #if abs(dy) <= 0.5 :
         #    current_sit = situation["Overtaked"]
-            
+
+        prob = random.uniform(0,1.0)
+        if prob < 0.009:
+            current_sit = situation["Overtaked"]
+
     elif current_sit == situation["Overtaked"]:
 
         qg = Float32MultiArray(data = goal)
         current_sit = situation["Free"]
-    	pub.publish(qg)
+        pub.publish(qg)
 
     situa = current_sit
     pub2.publish(situa)
