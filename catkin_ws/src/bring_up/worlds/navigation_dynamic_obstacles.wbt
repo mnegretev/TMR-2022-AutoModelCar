@@ -73,7 +73,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.5312200406266017 -0.6634169108539758 -0.5269566119042817 4.310240010432988
-  position -6.822880439119256 73.21605332736422 -21.378402748255443
+  position 26.681311008237333 156.57188718433486 4.318676491756603
   near 1
   follow "vehicle"
   followSmoothness 0
@@ -455,15 +455,6 @@ DEF OBS-4 RangeRoverSportSVRSimple {
 DEF OBS-1 CitroenCZeroSimple {
   translation -36.89 0.4 -10.45
   name "vehicle(1)"
-}
-DEF OBS-2 LincolnMKZSimple {
-  translation 9.3403 0.4 75.57
-  rotation 0 1 0 1.5708
-  name "vehicle(2)"
-}
-DEF OBS-3 MercedesBenzSprinterSimple {
-  translation 10.31 0.4 10.6
-  rotation 0 1 0 -1.5707953071795862
 }
 Robot {
   name "supervisor"
