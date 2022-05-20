@@ -1,0 +1,13 @@
+<launch>
+  
+  <!-- NOTA: agregar la direccion al archivo launch, no modificar el archivo "navigation_no_obstacles.launch" -->
+  <include file="$(find bring_up)/launch/navigation_dynamic_obstacles.launch"></include>
+
+  <node name="lane_detector" type="lane_detector_node.py" pkg="bring_up"></node>
+
+  <node name="behaviour_selector_task" type="behaviour_selector_task3_node.py" pkg="bring_up"></node>
+ 
+  <node name="control" type="control_task3_node.py" pkg="bring_up"></node>
+
+
+</launch>
