@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
 import math
+from timeit import timeit
 import numpy as np
 import rospy
 from std_msgs.msg import Float32MultiArray, Int16
 import planner_acker
+import time
 
 situation = {"Free": 0,
             "Overtaking": 1,
@@ -14,34 +16,32 @@ situation = {"Free": 0,
 current_sit= 0
 
 
-def sit_detec(O):
+def disc_sit_detec(O):
 
-    front_obs, dista = front_obstacles(O)
+    discrets, dista= discret(O)
 
-    if front_obs == False:
-        return situation["Free"]
-
-    elif front_obs == True:
-        
-        if dista < 14.0 :
-
-            return situation["Blocked"]
-        
-        else:
-            return situation["Free"]
+    if discrets[2] == True:
+        return situation["Blocked"]
+    elif discrets[1] == True or discrets[8] == True:
+        return situation["Overtaking"]
+    elif discrets[7] == True:
+        return situation["Overtaking"]
+       
 
 
 
-def front_obstacles(O):
+
+def discret(O):
 
     O = np.asarray(O,dtype=float)
     n = 5
     num_obs = int(sum(O[:n]))
-    a = 4.0
-    b = -1.0
+    a_x = 2.0
+    a_y = 1.5
+    celdas = np.ones((num_obs,9))
     count = n
     dist = 0
-    front = False
+    discr = np.zeros(9)
     if num_obs > 0 :
         
         for i in range (0, num_obs): #recorre por objeto 
@@ -53,15 +53,54 @@ def front_obstacles(O):
             bmax_y = O[count + 3]
             count += 4
             
-            if (bmax_x > b or bmin_x > b) :
+            if bmin_y > a_y :
+                temp = np.zeros(9)
+                temp[[3,4,5]] = True
+                celdas[i,:] = np.logical_and(celdas[i,:], temp)
+            elif bmin_y > -a_y :
+                temp = np.zeros(9)
+                temp[[3,4,5,6,2]] = True
+                celdas[i,:] = np.logical_and(celdas[i,:], temp)
 
-                if(bmin_y > -a or bmax_y < a):
-                    front = True
-                    dist = bmin_x
-                    break
+
+            if bmax_y  <- a_y :
+                temp = np.zeros(9)
+                temp[[1,8,7]] = True
+                celdas[i,:] = np.logical_and(celdas[i,:], temp)
+            elif bmax_y < a_y :
+                temp = np.zeros(9)
+                temp[[1,2,8,6,7]] = True
+                celdas[i,:] = np.logical_and(celdas[i,:], temp)
+
+
+            # verificar para x
+
+            if bmin_x > a_x :
+                temp = np.zeros(9)
+                temp[[1,2,3]] = True
+                celdas[i,:] = np.logical_and(celdas[i,:], temp)
+            elif bmin_x > -a_x :
+                temp = np.zeros(9)
+                temp[[1,2,3,4,8]] = True
+                celdas[i,:] = np.logical_and(celdas[i,:], temp)
+
+            if bmax_x  <- a_x :
+                temp = np.zeros(9)
+                temp[[5,6,7]] = True
+                celdas[i,:] = np.logical_and(celdas[i,:], temp)
+            elif bmax_x < a_x :
+                temp = np.zeros(9)
+                temp[[4,8,5,6,7]] = True
+                celdas[i,:] = np.logical_and(celdas[i,:], temp)
             
-
-    return front, dist
+            discr = np.logical_or(celdas[i,:], discr)
+            
+            #consultar
+            if celdas[i,2] == True:
+                dist = bmin_x
+        del(temp)
+        del(celdas)
+    return discr, dist
 
 
 def obstacle_callback(message):
@@ -70,7 +109,7 @@ def obstacle_callback(message):
 
     obs = np.asarray(message.data)
     
-    sit = sit_detec(obs)
+    sit = disc_sit_detec(obs)
 
     if current_sit == situation["Free"]:
 
@@ -78,70 +117,71 @@ def obstacle_callback(message):
 
             current_sit = situation["Blocked"]
         
-        elif sit == situation["Free"]:
+        elif sit == situation["Overtaked"]:
 
-            current_sit = situation["Free"]
+            current_sit = situation["Overtaked"]
 
-    
-    elif current_sit == situation["Blocked"]:
-        pass
-
-        '''if sit == situation["Blocked"]:
-
-            current_sit = situation["Blocked"]
+    elif current_sit == situation["Overtaking"]:
         
-        elif sit == situation["Free"]:
+        if sit == situation["Overtaked"]:
 
-            current_sit = situation["Free"]'''
-    
-    '''elif current_sit == situation["Overtaking"]:
+            current_sit = situation["Overtaked"]
 
-        #continua carrill izquierdo
-        qg = Float32MultiArray(data = qg_np)
 
-    elif current_sit == situation["Overtaked"]:
+        
 
-        #continua carrill izquierdo'''
     
 
 
 def lane_angle_callback(message):
 
-    global current_sit,pub2, pub
+    global current_sit, pub, pub2, init_time
 
-    alph_int = np.asarray(message.data)
-    goal = planner_acker.goal_config(float(alph_int[0]), float(alph_int[1]))
+    qg = []
+    alpha, b = np.asarray(message.data)
+    b_metros = b*4.0/60.0
+    goal = planner_acker.goal_config(float(alpha), float(b))
     
     if current_sit == situation["Free"]:
 
         qg = Float32MultiArray(data = goal)
+	pub.publish(qg)
 
     elif current_sit == situation["Blocked"]:
+        #inicio rebase
+        current_sit = situation["Overtaking"]
 
-        if alph_int[0] < -40.0*math.pi/180.0:
-            current_sit = situation["Overtaking"]
-            qg = [20.0,8.0,(50.0*math.pi/180.0)] #muevo izquierda
-            qg = Float32MultiArray(data = qg)
-            
-             
-    
     elif current_sit == situation["Overtaking"]:
+        
+        dx = 4.0
+        offset = 4.0
+        dy = offset + b_metros
+        p_l = [[dx],[dy]]
 
-        if alph_int[1] < 30.0 : #si ya me movi a la izq me muevo a la derecha
-            qg = [5.0,-3.0,(15.0*math.pi/180.0)] # muevo derecha
-            qg = Float32MultiArray(data = qg)
-            current_sit = situation["Overtaked"]
-        else:
-            qg = [3.0,0.0,0.0]
-            qg = Float32MultiArray(data = qg)
+        theta = alpha
+        c, s = np.cos(theta), np.sin(theta)
+        R_l_a_v = np.array(((c, -s), (s, c)))
 
+        goal_p = np.matmul(R_l_a_v, p_l)
+        g_x = goal_p[0,0]
+        g_y = goal_p[1,0]
+
+        qg = [g_x, g_y, 0.0]
+        
+        qg = Float32MultiArray(data = qg)
+	pub.publish(qg)
+
+        #if abs(dy) <= 0.5 :
+        #    current_sit = situation["Overtaked"]
+            
     elif current_sit == situation["Overtaked"]:
 
+        qg = Float32MultiArray(data = goal)
         current_sit = situation["Free"]
-    
+    	pub.publish(qg)
+
     situa = current_sit
     pub2.publish(situa)
-    pub.publish(qg)
 
     
   
@@ -151,8 +191,8 @@ def listener():
     
     global pub, pub2, current_sit
     
-    pub = rospy.Publisher('/goal_config', Float32MultiArray, queue_size=10)
-    pub2 = rospy.Publisher('/sit', Int16, queue_size=10)
+    pub = rospy.Publisher('/goal_config', Float32MultiArray, queue_size=1)
+    pub2 = rospy.Publisher('/sit', Int16, queue_size=1)
 
     rospy.init_node('behaviour_selector_task',anonymous=True)
 
@@ -163,4 +203,6 @@ def listener():
 
 if __name__ == '__main__':
     
+    time.sleep(10)
     listener()
+    

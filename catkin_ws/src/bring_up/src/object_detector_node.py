@@ -68,7 +68,7 @@ def chatter_callback(message):
             lol = message.data[c+0]+message.data[c+1]+ message.data[c+2]+message.data[c+3] # extrae los cuatro bits correspondientes a x,y o z
             lo = st.unpack('f',lol) # desempaco los valores bits en valores float entrega tupla (valor, )
              #elimino rayas extra
-            if (lo[0] > 50 or lo[0] < -50):
+            if (lo[0] > 30 or lo[0] < -30):
                 p_cloud[i,0] = 0.0
                 p_cloud[i,1] = 0.0
                 p_cloud[i,2] = 0.0
@@ -109,41 +109,41 @@ def chatter_callback(message):
     del(new)
     del(new_1)    
 
-    
-     #Estandarizado de datos
-    X = StandardScaler().fit_transform(new_p_cloud)
-        # Prepara datos en un dataframe de Pandas
-    col_name = ['x' + str(idx) for idx in range(0, new_p_cloud.shape[1])]
-    df = pd.DataFrame(new_p_cloud, columns=col_name)
-        #DBSCAN clusterizado
-    db = DBSCAN(eps=0.5, min_samples=10).fit(X)
-    core_samples_mask = np.zeros_like(db.labels_, dtype=bool) #Revisar si son importantes
-    core_samples_mask[db.core_sample_indices_] = True
-    labels = db.labels_
-    
-    df['cluster_label'] = labels
-    df = df.loc[(df['cluster_label'] > -1)] #purgo el ruido
-    labels = labels[labels>=0]
-    del(X)
-    n_obj = len(np.unique(labels)) # num de objetos
-    N = 5 # numero de obstaculos a detectar
-    O = np.zeros((N+4*N))
-    count = N
-    
-    for i in range (0, np.minimum(n_obj,N)):
-        if i < N :
-            O[i] = 1.0
-        #grupo = np.array([element for element, etiqueta in zip (new_p_cloud,labels) if etiqueta != -1])
-        grupo = df[df['cluster_label'] == i]
-        O[count],O[count+1],_= grupo.min(axis=0)
-        count += 2
-        O[count],O[count+1],_= grupo.max(axis=0)
-        count += 2
+    if len(new_p_cloud)>0:
+	     #Estandarizado de datos
+	    X = StandardScaler().fit_transform(new_p_cloud)
+		# Prepara datos en un dataframe de Pandas
+	    col_name = ['x' + str(idx) for idx in range(0, new_p_cloud.shape[1])]
+	    df = pd.DataFrame(new_p_cloud, columns=col_name)
+		#DBSCAN clusterizado
+	    db = DBSCAN(eps=0.5, min_samples=10).fit(X)
+	    core_samples_mask = np.zeros_like(db.labels_, dtype=bool) #Revisar si son importantes
+	    core_samples_mask[db.core_sample_indices_] = True
+	    labels = db.labels_
+	    
+	    df['cluster_label'] = labels
+	    df = df.loc[(df['cluster_label'] > -1)] #purgo el ruido
+	    labels = labels[labels>=0]
+	    del(X)
+	    n_obj = len(np.unique(labels)) # num de objetos
+	    N = 5 # numero de obstaculos a detectar
+	    O = np.zeros((N+4*N))
+	    count = N
+	    
+	    for i in range (0, np.minimum(n_obj,N)):
+		if i < N :
+		    O[i] = 1.0
+		#grupo = np.array([element for element, etiqueta in zip (new_p_cloud,labels) if etiqueta != -1])
+		grupo = df[df['cluster_label'] == i]
+		O[count],O[count+1],_= grupo.min(axis=0)
+		count += 2
+		O[count],O[count+1],_= grupo.max(axis=0)
+		count += 2
 
-    del(new_p_cloud)
-    del(count)
-    O = Float32MultiArray(data = O)
-    pub.publish(O)
+	    del(new_p_cloud)
+	    del(count)
+	    O = Float32MultiArray(data = O)
+	    pub.publish(O)
 
 
     
@@ -160,7 +160,7 @@ def listener():
 
     global pub
     
-    pub = rospy.Publisher('/obstacles', Float32MultiArray)
+    pub = rospy.Publisher('/obstacles', Float32MultiArray, queue_size=1)
 
     rospy.Subscriber("/point_cloud",PointCloud2,chatter_callback)
     rospy.init_node('object_detector_node',anonymous=True)

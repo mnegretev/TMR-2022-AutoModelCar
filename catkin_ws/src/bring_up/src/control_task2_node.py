@@ -8,8 +8,8 @@ import corke_acker_control
 
 def chatter_callback(message):
 
-    k_v = 2.0
-    k_h = 1.0
+    k_v = 2.5
+    k_h = 0.8
 
     goal = np.asarray(message.data)
     current_config = np.asarray([0.0, 0.0, 0.0]) 
