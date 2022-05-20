@@ -149,7 +149,7 @@ def callback_V(data0):
 	else: 
 		v = 20.0
 
-	if (FT<=0):
+	if (FT<=1):
 		if (Ev==False):	x1 = 190
 		else: x1 = 30 #10 
 		FT = FT+1
