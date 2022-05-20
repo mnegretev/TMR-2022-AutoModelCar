@@ -1,7 +1,7 @@
 <launch>
 
   <!-- NOTA: agregar la direccion al archivo launch, no modificar el archivo "navigation_static_obstacles.launch" -->
-  <include file="$(find bring_up)/launch/navigation_static_obstacles.launch"></include>
+  <include file="$(find bring_up)/launch/navigation_dynamic_obstacles.launch"></include>
 
   <node name="lane_detector" type="lane_detector_node.py" pkg="bring_up"></node>
   
