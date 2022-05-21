@@ -59,12 +59,12 @@ void lineParkingClass::callback(const std_msgs::Float32MultiArray& msg)
           
           if (count_auto<=1)
           {
-               msgSpeed.data=velocidad +2;
+               msgSpeed.data=5.0;
                msgSteering.data=0.0;     
           } 
           else if (count_auto==2)
           {
-               msgSpeed.data=velocidad;
+               msgSpeed.data=3.0;
                msgSteering.data=0.0;               
           }
           else
