@@ -121,11 +121,11 @@ void *ros_processing_threadfunc(void *arg){
       // This MUST be here
       mssleep(200);
 
-      speed = -5;
+      speed = -3;
       speedMsg.data = speed;
       pubSpeed.publish(speedMsg);
       // This MUST be here
-      mssleep(8000);  
+      mssleep(9000);  
       
       speed = 0;
       speedMsg.data = speed;
@@ -139,11 +139,11 @@ void *ros_processing_threadfunc(void *arg){
       // This MUST be here
       mssleep(700); 
 
-      speed = -5;
+      speed = -3;
       speedMsg.data = speed;
       pubSpeed.publish(speedMsg);
       // This MUST be here
-      mssleep(7500); 
+      mssleep(6500); 
 
       speed = 0;
       speedMsg.data = speed;
