@@ -23,6 +23,8 @@ SM_TURN_LEFT        = 'SM_TURN_LEFT'
 SM_GO_BACK          = 'SM_GO_BACK'
 SM_BREAK            = 'SM_BREAK'
 SM_INIT             = 'SM_INIT'
+SM_GO = 'SM_GO'
+SM_WAIT_GO = 'SM_WAIT_GO'
 
 # GLOBAL VARIABLES
 position        = [0.0, 0.0]
@@ -44,7 +46,7 @@ def callback_car_pose(msg):
         position = [0.0, 0.0]
 
     # TWO CARS DETECTED
-    if len(positions) == 2:
+    if len(positions) == 1:
         start_parking = True
         positions.clear()
     else:
@@ -80,93 +82,30 @@ def main():
 
     while not rospy.is_shutdown():
 
-        # # STATE MACHINE TO PARKING
-        # if state == SM_INIT:                        # STATE INIT
-        #     pub_speed.publish(speed)
-        #     if start_parking:
-        #         state = SM_BREAK
-        #     else:
-        #         state = SM_INIT
-
-        # elif state == SM_BREAK:                     # STATE BREAK
-        #     pub_speed.publish(0.0)
-        #     count = 0
-        #     state = SM_WAIT_BREAK
-        
-        # elif state == SM_WAIT_BREAK:                # STATE WAIT BREAK
-        #     count += 1
-        #     if count > 10:
-        #         state = SM_GO_BACK
-        #     else:
-        #         state = SM_WAIT_BREAK
-        
-        # elif state == SM_GO_BACK:                   # STATE GO BACK
-        #     count = 0
-        #     pub_speed.publish(-10.0)
-        #     state = SM_WAIT_GO_BACK
-
-        # elif state == SM_WAIT_GO_BACK:              # STATE WAIT GO BACK
-        #     count += 1
-        #     if count > 20:
-        #         state = SM_TURN_RIGHT
-        #     else:
-        #         state = SM_WAIT_GO_BACK
-
-        # elif state == SM_TURN_RIGHT:                # STATE TURN RIGHT BACK
-        #     count = 0
-        #     pub_steering.publish(0.4)
-        #     state = SM_WAIT_TURN_RIGHT
-
-        # elif state == SM_WAIT_TURN_RIGHT:           # STATE WAIT TURN RIGHT BACK
-        #     count += 1
-        #     if count > 20:
-        #         state = SM_TURN_LEFT
-        #     else: 
-        #         state = SM_WAIT_TURN_RIGHT
-        
-        # elif state == SM_TURN_LEFT:                 # STATE TURN LEFT BACK
-        #     count = 0
-        #     pub_steering.publish(-0.4)
-        #     state = SM_WAIT_TURN_LEFT
-
-        # elif state == SM_WAIT_TURN_LEFT:            # STATE WAIT TURN LEFT BACK
-        #     count += 1
-        #     if count > 20:
-        #         state = SM_GO_FORWARD
-        #     else:
-        #         state = SM_WAIT_TURN_LEFT
-
-        # elif state == SM_GO_FORWARD:                # STATE GO FORWARD
-        #     count = 0
-        #     pub_steering.publish(0.0)
-        #     pub_speed.publish(10.0)
-        #     state = SM_WAIT_GO_FORWARD
-
-        # elif state == SM_WAIT_GO_FORWARD:           # STATE WAIT GO FORWARD
-        #     count += 1
-        #     if count > 10:
-        #         state = SM_FINISH_PARKING
-        #     else:
-        #         state = SM_WAIT_GO_FORWARD
-
-        # elif state == SM_FINISH_PARKING:            # STATE FINISH PARKING
-        #     count = 0
-        #     pub_speed.publish(0.0)
-        #     pub_steering.publish(0.0)
-        #     speed = 0.0
-        #     start_parking = False
-        #     state = SM_INIT
-
-
         # STATE MACHINE TO PARKING
         if state == SM_INIT:                        # STATE INIT
             pub_speed.publish(speed)
             if start_parking:
-                state = SM_BREAK
+                print('INICIA PARKING')
+                state = SM_GO
             else:
                 state = SM_INIT
 
+        elif state == SM_GO:
+            print('AVANZANDO')
+            pub_speed.publish(speed)
+            count = 0
+            state = SM_WAIT_GO
+        
+        elif state == SM_WAIT_GO:
+            count += 1
+            if count > 50:
+                state = SM_BREAK
+            else:
+                state = SM_WAIT_GO
+
         elif state == SM_BREAK:                     # STATE BREAK
+            print('FRENANDO')
             pub_speed.publish(0.0)
             count = 0
             state = SM_WAIT_BREAK
@@ -179,6 +118,7 @@ def main():
                 state = SM_WAIT_BREAK
 
         elif state == SM_GO_BACK:                   # STATE GO BACK
+            print('REVERSA')
             count = 0
             pub_speed.publish(-10.0)
             state = SM_WAIT_GO_BACK
@@ -191,6 +131,7 @@ def main():
                 state = SM_WAIT_GO_BACK
 
         elif state == SM_TURN_RIGHT:                # STATE TURN RIGHT BACK
+            print('GIRANDO DERECHA')
             count = 0
             pub_steering.publish(0.4)
             state = SM_WAIT_TURN_RIGHT
@@ -203,6 +144,7 @@ def main():
                 state = SM_WAIT_TURN_RIGHT
 
         elif state == SM_TURN_LEFT:                 # STATE TURN LEFT BACK
+            print('GIRANDO IZQUIERDA')
             count = 0
             pub_steering.publish(-0.4)
             state = SM_WAIT_TURN_LEFT
@@ -215,6 +157,7 @@ def main():
                 state = SM_WAIT_TURN_LEFT
 
         elif state == SM_GO_FORWARD:                # STATE GO FORWARD
+            print('ALINEANDO')
             count = 0
             pub_steering.publish(0.0)
             pub_speed.publish(10.0)
