@@ -174,6 +174,7 @@ def main():
             speed = 0.0
             start_parking = False
             state = SM_INIT
+            rospy.signal_shutdown('FINISH')
 
 
         rate.sleep()
