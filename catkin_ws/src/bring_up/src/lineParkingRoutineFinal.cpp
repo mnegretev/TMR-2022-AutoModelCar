@@ -5,7 +5,6 @@
 
 
 
-
 class lineParkingClass
 {
 public:
@@ -29,7 +28,7 @@ private:
      int count=0;
      int auto_detect=0;
      int count_auto=0;
-     float velocidad = 3.0;
+     float velocidad = 5.0;
 };
 
 
