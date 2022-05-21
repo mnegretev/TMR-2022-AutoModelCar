@@ -1,0 +1,5 @@
+<launch>
+	<node name="vision" pkg="pumas_hm" type="vision_main.py" output="screen"/>
+	<node name="objects" pkg="pumas_hm" type="obstacles_parking.py" output="screen"/>
+	<node name="control" pkg="pumas_hm" type="control_parking.py" output="screen"/>
+</launch>
