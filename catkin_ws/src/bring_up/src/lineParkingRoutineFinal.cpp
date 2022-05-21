@@ -97,7 +97,7 @@ void lineParkingClass::callback(const std_msgs::Float32MultiArray& msg)
                steering_pub_.publish(msgSteering);
                count+=1;
           }          
-          else if (count>=12 && count<41)
+          else if (count>=12 && count<38)
           {    
                msgSpeed.data=-velocidad;
                msgSteering.data=0.52;
@@ -105,7 +105,7 @@ void lineParkingClass::callback(const std_msgs::Float32MultiArray& msg)
                steering_pub_.publish(msgSteering);
                count+=1;
           }
-          else if (count>=41 && count<61)
+          else if (count>=38 && count<55)
           {    
                msgSpeed.data=-velocidad;
                msgSteering.data=-0.78;
@@ -113,7 +113,7 @@ void lineParkingClass::callback(const std_msgs::Float32MultiArray& msg)
                steering_pub_.publish(msgSteering);
                count+=1;
           }
-          else if (count>=61 && count<67)
+          else if (count>=55 && count<58)
           {    
                msgSpeed.data=velocidad;
                msgSteering.data=-0.0;
