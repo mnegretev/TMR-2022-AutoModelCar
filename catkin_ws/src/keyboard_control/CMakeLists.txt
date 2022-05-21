@@ -45,7 +45,7 @@ find_package(GLUT REQUIRED )
 # )
 
 catkin_package(
-  INCLUDE_DIRS include
+  INCLUDE_DIRS #include
   LIBRARIES keyboard_control
   CATKIN_DEPENDS roscpp rospy std_msgs image_transport cv_bridge rosgraph_msgs pcl_conversions pcl_ros
 )
