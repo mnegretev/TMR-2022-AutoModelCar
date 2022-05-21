@@ -34,7 +34,7 @@ def movimientos(x,z):
         direc=0.0
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(11)
+        time.sleep(9)
         mov=1
         #pass
         
@@ -45,7 +45,7 @@ def movimientos(x,z):
         vel=1.0
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(0.5)
+        time.sleep(0.3)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
@@ -56,7 +56,7 @@ def movimientos(x,z):
         direc = 0.15
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(6)
+        time.sleep(4)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
@@ -67,7 +67,7 @@ def movimientos(x,z):
         direc = 0.9
         Vpub.publish(vel)
         Spub.publish(direc)
-        time.sleep(3.5)
+        time.sleep(2)
         vel= 0.0
         direc=0.0
         Vpub.publish(vel)
