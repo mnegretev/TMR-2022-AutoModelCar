@@ -15,7 +15,8 @@
   <node pkg="tf" type="static_transform_publisher" name="car_to_gps" args="0 -0.1 0 0 3.1415926 0 car_link gps_link 10"/>
 
   <node name="object_parking"   pkg="bring_up" type="object_parking"      output="screen" respawn="true"/>
-  <node name="parking"          pkg="bring_up" type="parking.py"          output="screen" respawn="true"/>
+  <!-- <node name="parking"          pkg="bring_up" type="parking.py"          output="screen" respawn="true"/> -->
+  <!-- <node name="parking"          pkg="bring_up" type="parking_test.py"          output="screen" respawn="true"/> -->
 
   <param name="/speed" type="double" value="10.0"/>
   
