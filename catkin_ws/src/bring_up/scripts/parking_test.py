@@ -96,7 +96,7 @@ def main():
         elif state == SM_WAIT_GO:
             pub_speed.publish(speed)
             count += 1
-            if count > 133:
+            if count > 125:
                 state = SM_BREAK
             else:
                 state = SM_WAIT_GO
