@@ -128,7 +128,7 @@ void *point_cloud_capture_threadfunc(void *arg){
 
          
        //  if ((rear_num_blobs == 1 && frontal_num_blobs == 0) || rear_blobs.at(0).x + rear_blobs.at(0).width *0.5 > 130){
-         if (rear_blobs.size() > 0 && rear_blobs.at(0).x + rear_blobs.at(0).width *0.5 > 180){  
+         if (rear_blobs.size() > 0 && rear_blobs.at(0).x + rear_blobs.at(0).width *0.5 > 170){  
             action = 1; // stop the car
             std::cout << "Action: " << action << std::endl;
             std::cout.flush();  
