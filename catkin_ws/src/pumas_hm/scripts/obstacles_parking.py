@@ -31,7 +31,7 @@ def callback_cloud(msg):
             y_pos += y
             z_pos += z
     delta = last - x_pos
-    if delta < -5 and not flag:
+    if delta < -4 and not flag:
         count +=1
         flag = True
         last = x_pos
