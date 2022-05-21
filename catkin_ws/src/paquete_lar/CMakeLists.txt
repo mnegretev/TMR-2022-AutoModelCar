@@ -166,6 +166,7 @@ include_directories(
    scripts/recorre_pista.py
    scripts/obstaculos_estaticos.py
    scripts/obstaculos_dinamicos.py
+   scripts/estacionamiento.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
