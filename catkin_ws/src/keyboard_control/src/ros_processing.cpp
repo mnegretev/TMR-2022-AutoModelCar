@@ -102,7 +102,7 @@ void *ros_processing_threadfunc(void *arg){
 
     if (action == 0){
 
-      speed = 7;
+      speed = 5;
       speedMsg.data = speed;
       pubSpeed.publish(speedMsg);
 
@@ -125,7 +125,7 @@ void *ros_processing_threadfunc(void *arg){
       speedMsg.data = speed;
       pubSpeed.publish(speedMsg);
       // This MUST be here
-      mssleep(13500);  
+      mssleep(13000);  
       
       speed = 0;
       speedMsg.data = speed;
