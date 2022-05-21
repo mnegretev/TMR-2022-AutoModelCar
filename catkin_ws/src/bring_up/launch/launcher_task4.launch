@@ -1,0 +1,11 @@
+<launch>
+
+  <include file="$(find bring_up)/launch/parking.launch"></include>
+
+  <node name="lineParkingRoutineFinal_node" 
+		type="lineParkingRoutineFinal_node" 
+		pkg="bring_up"></node>
+  
+  <node name="object_detector_node" type="object_detector_node_task4.py" pkg="bring_up"></node>
+
+</launch>
