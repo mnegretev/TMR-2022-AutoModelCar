@@ -125,7 +125,7 @@ void *ros_processing_threadfunc(void *arg){
       speedMsg.data = speed;
       pubSpeed.publish(speedMsg);
       // This MUST be here
-      mssleep(9000);  
+      mssleep(8000);  
       
       speed = 0;
       speedMsg.data = speed;
