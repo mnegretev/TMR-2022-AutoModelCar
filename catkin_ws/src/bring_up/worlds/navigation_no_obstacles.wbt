@@ -66,8 +66,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.5833659009215332 -0.5701138892465627 0.5784931969610065 4.203707279898423
-  position 70.69750796824977 48.51802886002494 182.01441610168177
+  orientation 0.6542001094605171 0.5204417225273883 -0.5487828625554667 2.288973324903449
+  position 62.494026031535235 41.797447266662225 51.84351086737259
   near 1
   follow "vehicle"
   lensFlare LensFlare {
@@ -92,6 +92,16 @@ Floor {
   }
 }
 BmwX5 {
+  hidden position_0_0 8.393215550249803e-11
+  hidden position2_0_0 -1.374230573173568e-08
+  hidden position_0_1 -8.393141082840029e-11
+  hidden position2_0_1 -1.3742305723929425e-08
+  hidden position_0_2 -7.187045102870718e-05
+  hidden position_0_3 -7.187045103104803e-05
+  hidden rotation_3 1 0 0 7.187044922941193e-05
+  hidden rotation_4 -1 0 0 7.187044922941193e-05
+  translation -0.0014619691066675156 1.3362378325093977e-16 0.29692024842572
+  rotation -3.2512694941085436e-15 -1 -1.3437932432641497e-13 0.00449455922830268
 }
 StraightRoadSegment {
   name "north_straight_road"
@@ -147,7 +157,7 @@ StraightRoadSegment {
   translation 80 35 0
   rotation 0 0 1 1.5708
   name "west_intersection_north_segment"
-  length 16.6
+  length 16.5
 }
 StraightRoadSegment {
   translation 88.5 60 0
@@ -173,10 +183,10 @@ RoadIntersection {
   name "east_intersection"
 }
 StraightRoadSegment {
-  translation 50 35 0
+  translation 50 34 0
   rotation 0 0 1 1.5708
   name "east_intersection_north_segment"
-  length 16.6
+  length 16.5
 }
 StraightRoadSegment {
   translation 25 60 0
@@ -184,13 +194,13 @@ StraightRoadSegment {
   length 16.5
 }
 StraightRoadSegment {
-  translation 50 68.5 0
-  rotation 0 0 1 1.5807
+  translation 50 68.7 0
+  rotation 0 0 1 1.57
   name "east_intersection_south_segment"
   length 6.5
 }
 CurvedRoadSegment {
-  translation 35 75 0
+  translation 35 75.3 0
   name "east_small_curve"
   curvatureRadius 15
 }
