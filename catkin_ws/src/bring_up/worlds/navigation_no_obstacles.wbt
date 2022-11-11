@@ -66,8 +66,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.6542001094605171 0.5204417225273883 -0.5487828625554667 2.288973324903449
-  position 62.494026031535235 41.797447266662225 51.84351086737259
+  orientation 0.5404814422632751 0.5276124578612531 -0.6553662372129169 1.9676006042929834
+  position 59.0834147350525 99.38728060956473 240.06971878633004
   near 1
   follow "vehicle"
   lensFlare LensFlare {
@@ -92,20 +92,13 @@ Floor {
   }
 }
 BmwX5 {
-  hidden position_0_0 8.393215550249803e-11
-  hidden position2_0_0 -1.374230573173568e-08
-  hidden position_0_1 -8.393141082840029e-11
-  hidden position2_0_1 -1.3742305723929425e-08
-  hidden position_0_2 -7.187045102870718e-05
-  hidden position_0_3 -7.187045103104803e-05
-  hidden rotation_3 1 0 0 7.187044922941193e-05
-  hidden rotation_4 -1 0 0 7.187044922941193e-05
-  translation -0.0014619691066675156 1.3362378325093977e-16 0.29692024842572
+  translation 10 -1.5 0.29692
   rotation -3.2512694941085436e-15 -1 -1.3437932432641497e-13 0.00449455922830268
 }
 StraightRoadSegment {
+  translation 10 0 0
   name "north_straight_road"
-  length 120
+  length 110
 }
 CurvedRoadSegment {
   translation 120 20 0
@@ -183,7 +176,7 @@ RoadIntersection {
   name "east_intersection"
 }
 StraightRoadSegment {
-  translation 50 34 0
+  translation 50 35 0
   rotation 0 0 1 1.5708
   name "east_intersection_north_segment"
   length 16.5
@@ -194,13 +187,35 @@ StraightRoadSegment {
   length 16.5
 }
 StraightRoadSegment {
-  translation 50 68.7 0
+  translation 50 68.5 0
   rotation 0 0 1 1.57
   name "east_intersection_south_segment"
   length 6.5
 }
 CurvedRoadSegment {
-  translation 35 75.3 0
+  translation 35 75 0
   name "east_small_curve"
   curvatureRadius 15
+}
+StraightRoadSegment {
+  translation 10 90 0
+  name "south_east_straight_segment"
+  length 25
+}
+CurvedRoadSegment {
+  translation 10 70 0
+  rotation 0 0 1 1.5708
+  name "south_east_curved_road"
+  curvatureRadius 20
+}
+StraightRoadSegment {
+  translation -10 20 0
+  rotation 0 0 1 1.5708
+  name "east_straight_road"
+  length 50
+}
+CurvedRoadSegment {
+  translation 10 20 0
+  rotation 0 0 1 3.1415926
+  curvatureRadius 20
 }
