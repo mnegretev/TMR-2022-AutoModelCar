@@ -66,8 +66,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.5404814422632751 0.5276124578612531 -0.6553662372129169 1.9676006042929834
-  position 59.0834147350525 99.38728060956473 240.06971878633004
+  orientation 0.022570678158126124 0.02600220909806341 0.9994070490093127 4.814040080080415
+  position 53.73592715036895 226.72383959132307 12.661972072969636
   near 1
   follow "vehicle"
   lensFlare LensFlare {
@@ -92,8 +92,16 @@ Floor {
   }
 }
 BmwX5 {
-  translation 10 -1.5 0.29692
-  rotation -3.2512694941085436e-15 -1 -1.3437932432641497e-13 0.00449455922830268
+  hidden translation_1 0 0 0
+  hidden rotation_1 0 1 0 0
+  hidden translation_2 0 0 0
+  hidden rotation_2 0 1 0 0
+  hidden translation_3 0 0 0
+  hidden rotation_3 1 0 0 0.00015234572342681137
+  hidden translation_4 0 0 0
+  hidden rotation_4 -1 0 0 0.00015234572342681137
+  translation 10.000189067478008 -1.4999999999999656 0.2969215003742568
+  rotation -1.3371485048341912e-14 -1 -2.7890099123657286e-12 0.004493937431257112
 }
 StraightRoadSegment {
   translation 10 0 0
@@ -146,6 +154,26 @@ RoadIntersection {
   rotation 0 0 1 0.785398
   name "west_intersection"
 }
+GenericTrafficLight {
+  translation 85 66 0
+  name "generic traffic light(1)"
+}
+GenericTrafficLight {
+  translation 85 54 0
+}
+GenericTrafficLight {
+  translation 75 65 0
+  name "trafficLight2_westIntersection"
+  state "green"
+}
+GenericTrafficLight {
+  translation 75 55 0
+  rotation 0 0 1 1.5708003061004252
+  name "trafficLight1_westIntersection"
+  greenTime 3
+  redTime 3
+  state "green"
+}
 StraightRoadSegment {
   translation 80 35 0
   rotation 0 0 1 1.5708
@@ -175,6 +203,16 @@ RoadIntersection {
   rotation 0 0 1 0.785398
   name "east_intersection"
 }
+GenericTrafficLight {
+  translation 55 65 0
+  rotation 0 0 1 -1.4398996938995747
+  name "trafficLight2_eastIntersection"
+}
+GenericTrafficLight {
+  translation 44 55 0
+  name "trafficLight1_eastIntersection"
+  state "green"
+}
 StraightRoadSegment {
   translation 50 35 0
   rotation 0 0 1 1.5708
@@ -188,7 +226,7 @@ StraightRoadSegment {
 }
 StraightRoadSegment {
   translation 50 68.5 0
-  rotation 0 0 1 1.57
+  rotation 0 0 1 1.571
   name "east_intersection_south_segment"
   length 6.5
 }
