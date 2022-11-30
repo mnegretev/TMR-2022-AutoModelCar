@@ -5,7 +5,7 @@
 # LIBRARIES
 import math
 from vehicle import Driver
-from controller import Camera, Keyboard, Lidar, Gyro, GPS
+from controller import Camera, Keyboard, Lidar #Gyro,GPS
 import rospy
 from std_msgs.msg import Float64
 from sensor_msgs.msg import Image, PointCloud2, PointField, NavSatFix, NavSatStatus, Imu
@@ -31,12 +31,12 @@ lidar.enable(TIME_STEP)
 lidar.enablePointCloud()
 
 # INIT GPS
-gps = GPS('gps')
+'''gps = GPS('gps')
 gps.enable(TIME_STEP)
 
 # INIT GYRO
 gyro = Gyro('gyro')
-gyro.enable(TIME_STEP)
+gyro.enable(TIME_STEP)'''
 
 # INIT KEYBOARD
 keyboard = Keyboard()
@@ -85,7 +85,7 @@ def main():
     PointField(name = 'z', offset = 8, datatype = PointField.FLOAT32, count = 1),
   ]
   msg_point_cloud.is_bigendian = False
-
+  '''
   # GPS MESSAGE
   msg_gps = NavSatFix()
   msg_gps.header.stamp = rospy.Time.now()
@@ -95,14 +95,15 @@ def main():
   # GYRO MESSAGE
   msg_gyro = Imu()
   msg_gyro.header.stamp = rospy.Time.now()
-  msg_gyro.header.frame_id = 'gyro_link'
+  msg_gyro.header.frame_id = 'gyro_link
+  '''
   
 
   # PUBLISHERS
   pub_camera_data  = rospy.Publisher('/camera/rgb/raw', Image, queue_size=10)
   pub_point_cloud  = rospy.Publisher('/point_cloud'   , PointCloud2, queue_size=10)
-  pub_nav_gps   = rospy.Publisher('/gps', NavSatFix, queue_size=10)
-  pub_imu_gyro     = rospy.Publisher('/gyro', Imu, queue_size=10)
+ # pub_nav_gps   = rospy.Publisher('/gps', NavSatFix, queue_size=10)
+  #pub_imu_gyro     = rospy.Publisher('/gyro', Imu, queue_size=10)
 
   # SUBSCRIBERS
   rospy.Subscriber('/speed'  , Float64, callback_cruise_speed  )
@@ -116,18 +117,20 @@ def main():
     msg_image.data = camera.getImage()                                     # GET IMAGE DATA FROM CAMERA
     msg_point_cloud.data = lidar.getPointCloud(data_type='buffer')         # GET POINT CLOUD FROM LIDAR
     msg_point_cloud.header.stamp = rospy.Time.now()
+    '''  
     msg_gyro.angular_velocity.x = gyro.getValues()[0]                      # GET X COMPONENT FROM GYRO
     msg_gyro.angular_velocity.y = gyro.getValues()[1]                      # GET Y COMPONENT FROM GYRO
     msg_gyro.angular_velocity.z = gyro.getValues()[2]                      # GET Z COMPONENT FROM GYRO
     msg_gps.latitude = gps.getValues()[0]                                  # GET X COMPONENT FROM GPS  
     msg_gps.longitude = gps.getValues()[1]                                 # GET Y COMPONENT FROM GPS  
-    msg_gps.altitude = gps.getValues()[2]                                  # GET Z COMPONENT FROM GPS 
+    msg_gps.altitude = gps.getValues()[2]  
+    '''                               # GET Z COMPONENT FROM GPS 
     
     
     pub_camera_data.publish(msg_image)                                     # PUBLISHING IMAGE MESSAGE
     pub_point_cloud.publish(msg_point_cloud)                               # PUBLISHING POINTCLOUD2 MESSAGE
-    pub_imu_gyro.publish(msg_gyro)                                         # PUBLISHING IMU MESSAGE
-    pub_nav_gps.publish(msg_gps)                                           # PUBLISHING NAVSATFIX MESSAGE
+    # pub_imu_gyro.publish(msg_gyro)                                         # PUBLISHING IMU MESSAGE
+    # pub_nav_gps.publish(msg_gps)                                           # PUBLISHING NAVSATFIX MESSAGE
     msg = Clock()
     time = driver.getTime()
     msg.clock.secs = int(time)
