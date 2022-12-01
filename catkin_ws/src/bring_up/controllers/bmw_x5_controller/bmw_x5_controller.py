@@ -1,48 +1,38 @@
 #!/usr/bin/env python3
-
-""" bmw_x5_controller """
-
-# LIBRARIES
 import math
 from vehicle import Driver
-from controller import Camera, Keyboard, Lidar #Gyro,GPS
+from controller import Camera, Lidar #Gyro,GPS
 import rospy
 from std_msgs.msg import Float64
 from sensor_msgs.msg import Image, PointCloud2, PointField, NavSatFix, NavSatStatus, Imu
 from rosgraph_msgs.msg import Clock
-
-# CONSTANTS
-TIME_STEP = 33
-TRACK_FRONT = 1.7
-WHEEL_BASE = 4.0
 
 # INIT DRIVER
 driver = Driver()
 driver.setCruisingSpeed(0.0)                                  # SPEED CONTROL km/h - INITIAL SPEED
 driver.setSteeringAngle(0.0)                                  # STEERING ANGLE - INITIAL ANGLE
 
-# INIT CAMERA
+# CONSTANTS
+TIME_STEP = int(driver.getBasicTimeStep())
+
+# INIT SENSORS
 camera = Camera('camera')                                     # GET CAMERA FROM DEVICES
 camera.enable(TIME_STEP)    
 
-# INIT LIDAR
-lidar = Lidar('lidar')
+lidar = Lidar('Velodyne HDL-64E')
 lidar.enable(TIME_STEP)
 lidar.enablePointCloud()
 
 # INIT GPS
-'''gps = GPS('gps')
-gps.enable(TIME_STEP)
+# gps = GPS('gps')
+# gps.enable(TIME_STEP)
 
-# INIT GYRO
-gyro = Gyro('gyro')
-gyro.enable(TIME_STEP)'''
+# # INIT GYRO
+# gyro = Gyro('gyro')
+# gyro.enable(TIME_STEP)
 
-# INIT KEYBOARD
-keyboard = Keyboard()
-keyboard.enable(TIME_STEP)
 
-# CRUISE SPEED CALLBACK
+# Cruise speed callback
 def callback_cruise_speed( msg ):
   driver.setCruisingSpeed(msg.data)
 
@@ -56,7 +46,7 @@ def main():
   # INIT ROS
   print('STARTING BMW X5 CONTROLLER NODE ...')
   rospy.init_node('bmw_x5_controller')
-  rate = rospy.Rate(30)
+  rate = rospy.Rate(1000/TIME_STEP)
 
   print('SIMULATION FOR THE  AUTOMODELCAR LEAGUE OF THE MEXICAN ROBOTICS TOURNAMENT')
   print('TO MOVE THE VEHICLE, USE THE CORRESPONDING TOPICS')
@@ -100,23 +90,36 @@ def main():
   
 
   # PUBLISHERS
+  pub_clock        = rospy.Publisher('/clock', Clock, queue_size=1)
   pub_camera_data  = rospy.Publisher('/camera/rgb/raw', Image, queue_size=10)
   pub_point_cloud  = rospy.Publisher('/point_cloud'   , PointCloud2, queue_size=10)
- # pub_nav_gps   = rospy.Publisher('/gps', NavSatFix, queue_size=10)
-  #pub_imu_gyro     = rospy.Publisher('/gyro', Imu, queue_size=10)
+  # pub_nav_gps   = rospy.Publisher('/gps', NavSatFix, queue_size=10)
+  # pub_imu_gyro     = rospy.Publisher('/gyro', Imu, queue_size=10)
 
   # SUBSCRIBERS
   rospy.Subscriber('/speed'  , Float64, callback_cruise_speed  )
   rospy.Subscriber('/steering', Float64, callback_steering_angle)
-  clockPublisher = rospy.Publisher('clock', Clock, queue_size=1)
-  timestep = int(driver.getBasicTimeStep())
-  print("Using timestep=" + str(timestep))
-
-  # MAIN LOOP
+  
+  print("Using timestep=" + str(TIME_STEP) + " ms")
+  time_lidar_last_reading  = driver.getTime()
+  time_camera_last_reading = driver.getTime()
   while driver.step() != -1 and not rospy.is_shutdown():
-    msg_image.data = camera.getImage()                                     # GET IMAGE DATA FROM CAMERA
-    msg_point_cloud.data = lidar.getPointCloud(data_type='buffer')         # GET POINT CLOUD FROM LIDAR
-    msg_point_cloud.header.stamp = rospy.Time.now()
+    current_t = driver.getTime()
+    msg_clock = Clock()
+    msg_clock.clock.secs  = int(current_t)
+    msg_clock.clock.nsecs = int(round(1000 * (current_t - msg_clock.clock.secs)) * 1.0e+6)
+    pub_clock.publish(msg_clock)
+
+    if (current_t - time_lidar_last_reading) >= 0.1:
+      time_lidar_last_reading = current_t                            # Lidar readings are published every 100 ms
+      msg_point_cloud.data = lidar.getPointCloud(data_type='buffer') # Get point cloud from lidar
+      msg_point_cloud.header.stamp = rospy.Time.now()                # Stamp the current lidar reading
+      pub_point_cloud.publish(msg_point_cloud)                       # Publish point cloud ros message
+    if (current_t - time_camera_last_reading) >= 0.033:
+      time_camera_last_reading = current_t
+      msg_image.data = camera.getImage()                             # Get image data from camera
+      pub_camera_data.publish(msg_image)                             # Publish image ros message
+    
     '''  
     msg_gyro.angular_velocity.x = gyro.getValues()[0]                      # GET X COMPONENT FROM GYRO
     msg_gyro.angular_velocity.y = gyro.getValues()[1]                      # GET Y COMPONENT FROM GYRO
@@ -127,18 +130,12 @@ def main():
     '''                               # GET Z COMPONENT FROM GPS 
     
     
-    pub_camera_data.publish(msg_image)                                     # PUBLISHING IMAGE MESSAGE
-    pub_point_cloud.publish(msg_point_cloud)                               # PUBLISHING POINTCLOUD2 MESSAGE
+    
+    
     # pub_imu_gyro.publish(msg_gyro)                                         # PUBLISHING IMU MESSAGE
     # pub_nav_gps.publish(msg_gps)                                           # PUBLISHING NAVSATFIX MESSAGE
-    msg = Clock()
-    time = driver.getTime()
-    msg.clock.secs = int(time)
-    # round prevents precision issues that can cause problems with ROS timers
-    msg.clock.nsecs = int(round(1000 * (time - msg.clock.secs)) * 1.0e+6)
-    clockPublisher.publish(msg)
     rate.sleep()
-    pass
+    
  
 
 if __name__ == "__main__":
