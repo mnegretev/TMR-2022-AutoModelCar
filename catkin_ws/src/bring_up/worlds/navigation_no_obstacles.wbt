@@ -66,8 +66,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.4695371725516215 -0.46774291587451 0.7488333648025038 4.43343139513904
-  position 43.97213071819673 65.56562111707186 92.05602568456364
+  orientation -0.4485134076421417 -0.44652269590885807 0.7742436342673534 4.465437830676591
+  position 19.268987745255405 60.739678106430155 98.50580764906903
   near 1
   follow "vehicle"
   lensFlare LensFlare {
@@ -78,7 +78,6 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 Floor {
-  translation 0 0 -0.02
   size 10000 10000
   tileSize 1 1
   appearance PBRAppearance {
@@ -94,13 +93,13 @@ Floor {
   }
 }
 StraightRoadSegment {
-  translation 80 68.5 0
+  translation 80 68.5 0.1
   rotation 0 0 1 1.5708
   name "west_intersection_south_segment"
   length 6.5
 }
 BmwX5 {
-  translation 10.003107562028891 -1.5000000000000666 0.3969701306177328
+  translation 10.003107562028891 -1.5000000000000666 0.4969701306177328
   rotation -9.135379245293787e-15 -1 1.7544986643064575e-12 0.004488380251354504
   color 0.643137 0 0
   controller "bmw_x5_controller"
@@ -120,7 +119,7 @@ BmwX5 {
   ]
 }
 StraightRoadSegment {
-  translation 10 0 0
+  translation 10 0 0.1
   name "north_straight_road"
   length 110
 }
@@ -137,42 +136,42 @@ SpeedLimitSign {
   ]
 }
 CurvedRoadSegment {
-  translation 120 20 0
+  translation 120 20 0.1
   rotation 0 0 1 -1.5708
   name "north_west_curved_road"
   curvatureRadius 20
 }
 StraightRoadSegment {
-  translation 140 20 0
+  translation 140 20 0.1
   rotation 0 0 1 1.5708
   name "west_straight_road"
   length 50
 }
 CurvedRoadSegment {
-  translation 120 70 0
+  translation 120 70 0.1
   name "south_west_curved_road"
   curvatureRadius 20
 }
 StraightRoadSegment {
-  translation 95 90 0
+  translation 95 90 0.1
   name "south_west_straight_road"
   length 25
 }
 CurvedRoadSegment {
-  translation 95 75 0
+  translation 95 75 0.1
   rotation 0 0 1 1.5708
   name "west_small_curve"
   curvatureRadius 15
 }
 CurvedRoadSegment {
-  translation 105 35 0
+  translation 105 35 0.1
   name "west_long_curve"
   curvatureRadius 25
   totalAngle 4.71239
   subdivision 50
 }
 RoadIntersection {
-  translation 80 60 0
+  translation 80 60 0.1
   rotation 0 0 1 0.785398
   name "west_intersection"
 }
@@ -181,7 +180,7 @@ GenericTrafficLight {
   rotation 0 0 1 -1.5707953071795862
   name "trafficLight4_westIntersection"
   greenTime 30
-  state "green"
+  state "red"
 }
 GenericTrafficLight {
   translation 85 55 -0.02
@@ -207,23 +206,23 @@ GenericTrafficLight {
   state "green"
 }
 StraightRoadSegment {
-  translation 80 35 0
+  translation 80 35 0.1
   rotation 0 0 1 1.5708
   name "west_intersection_north_segment"
   length 16.5
 }
 StraightRoadSegment {
-  translation 88.5 60 0
+  translation 88.5 60 0.1
   name "west_intersection_west_segment"
   length 16.5
 }
 StraightRoadSegment {
-  translation 58.5 60 0
+  translation 58.5 60 0.1
   name "inter_intersections_road"
   length 13
 }
 CurvedRoadSegment {
-  translation 25 35 0
+  translation 25 35 0.1
   rotation 0 0 1 -1.5708
   name "east_long_curve"
   curvatureRadius 25
@@ -231,7 +230,7 @@ CurvedRoadSegment {
   subdivision 50
 }
 RoadIntersection {
-  translation 50 60 0
+  translation 50 60 0.1
   rotation 0 0 1 0.785398
   name "east_intersection"
 }
@@ -267,52 +266,52 @@ GenericTrafficLight {
   state "green"
 }
 StraightRoadSegment {
-  translation 50 35 0
+  translation 50 35 0.1
   rotation 0 0 1 1.5708
   name "east_intersection_north_segment"
   length 16.5
 }
 StraightRoadSegment {
-  translation 25 60 0
+  translation 25 60 0.1
   name "east_intersection_east_segment"
   length 16.5
 }
 StraightRoadSegment {
-  translation 50 68.5 0
+  translation 50 68.5 0.1
   rotation 0 0 1 1.571
   name "east_intersection_south_segment"
   length 6.5
 }
 CurvedRoadSegment {
-  translation 35 75 0
+  translation 35 75 0.1
   name "east_small_curve"
   curvatureRadius 15
 }
 StraightRoadSegment {
-  translation 10 90 0
+  translation 10 90 0.1
   name "south_east_straight_segment"
   length 25
 }
 CurvedRoadSegment {
-  translation 10 70 0
+  translation 10 70 0.1
   rotation 0 0 1 1.5708
   name "south_east_curved_road"
   curvatureRadius 20
 }
 StraightRoadSegment {
-  translation -10 20 0
+  translation -10 20 0.1
   rotation 0 0 1 1.5708
   name "east_straight_road"
   length 50
 }
 CurvedRoadSegment {
-  translation 10 20 0
+  translation 10 20 0.1
   rotation 0 0 1 3.1415926
   curvatureRadius 20
 }
 HighwayPole {
-  translation 16 -8 0
-  rotation 0 0 1 3.0106903061004253
+  translation 16 -5.5 0
+  rotation 0 0 1 3.141592
   name "roadPole"
   length 7
   rightHorizontalSigns [
@@ -321,7 +320,17 @@ HighwayPole {
       height 1.5
       length 6.5
       texture [
-        "/home/robocup/Downloads/cartel.jpg"
+        "../resources/FMR.jpg"
+      ]
+    }
+  ]
+  rightVerticalSigns [
+    HighwaySign {
+      name "horizontal sign"
+      height 2.1
+      length 3.2
+      texture [
+        "../resources/Xalapa.jpg"
       ]
     }
   ]

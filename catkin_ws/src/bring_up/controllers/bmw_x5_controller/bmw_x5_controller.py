@@ -38,7 +38,7 @@ def callback_cruise_speed( msg ):
 
 # STEERING ANGLE CALLBACK
 def callback_steering_angle(msg):
-  driver.setSteeringAngle(msg.data)
+  driver.setSteeringAngle(-msg.data)
 
 # MAIN FUNCTION
 def main():

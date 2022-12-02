@@ -1,0 +1,14 @@
+<RCC>
+<qresource>
+    <file>images/btnUp.png</file>
+    <file>images/btnUpLeft.png</file>
+    <file>images/btnUpRight.png</file>
+    <file>images/btnDown.png</file>
+    <file>images/btnDownLeft.png</file>
+    <file>images/btnDownRight.png</file>
+    <file>images/btnLeft.png</file>
+    <file>images/btnRight.png</file>
+    <file>images/SteeringWheel.png</file>
+    <file>images/Speedometer.png</file>
+</qresource>
+</RCC>
