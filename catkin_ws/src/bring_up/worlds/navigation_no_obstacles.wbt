@@ -100,11 +100,12 @@ BmwX5 {
   sensorsSlotTop [
     Camera {
       translation 0.8 0 -0.1
+      rotation 0 1 0 0.07
       boundingObject TexturedBox {
       }
       width 1280
       height 960
-      noise 0.01
+      noise 0.02
     }
     VelodyneHDL-64E {
       translation 0.3 0 0.15
