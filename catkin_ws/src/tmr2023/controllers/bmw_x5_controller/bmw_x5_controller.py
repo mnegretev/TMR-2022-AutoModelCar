@@ -110,12 +110,12 @@ def main():
     msg_clock.clock.nsecs = int(round(1000 * (current_t - msg_clock.clock.secs)) * 1.0e+6)
     pub_clock.publish(msg_clock)
 
-    if (current_t - time_lidar_last_reading) >= 0.1:
+    if (current_t - time_lidar_last_reading) >= 0.085:
       time_lidar_last_reading = current_t                            # Lidar readings are published every 100 ms
       msg_point_cloud.data = lidar.getPointCloud(data_type='buffer') # Get point cloud from lidar
       msg_point_cloud.header.stamp = rospy.Time.now()                # Stamp the current lidar reading
       pub_point_cloud.publish(msg_point_cloud)                       # Publish point cloud ros message
-    if (current_t - time_camera_last_reading) >= 0.033:
+    if (current_t - time_camera_last_reading) >= 0.028:
       time_camera_last_reading = current_t
       msg_image.data = camera.getImage()                             # Get image data from camera
       pub_camera_data.publish(msg_image)                             # Publish image ros message

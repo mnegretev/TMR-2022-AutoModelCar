@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(bring_up)
+project(tmr2023)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,14 +8,8 @@ project(bring_up)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
-  nav_msgs
   roscpp
   rospy
-  sensor_msgs
-  std_msgs
-  tf
-  visualization_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -75,7 +69,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   geometry_msgs#   nav_msgs#   sensor_msgs#   std_msgs#   visualization_msgs
+#   std_msgs  # Or other packages containing msgs
 # )
 
 ################################################
@@ -109,8 +103,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES bring_up
-#  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy sensor_msgs std_msgs tf visualization_msgs
+#  LIBRARIES tmr2023
+#  CATKIN_DEPENDS roscpp rospy
 #  DEPENDS system_lib
 )
 
@@ -127,7 +121,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/bring_up.cpp
+#   src/${PROJECT_NAME}/tmr2023.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -138,7 +132,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/bring_up_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/tmr2023_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -202,7 +196,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_bring_up.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_tmr2023.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
